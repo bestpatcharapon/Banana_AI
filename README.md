@@ -1,4 +1,4 @@
-# Banana MCP API
+# Banana MCP API Heeloww
 
 Banana MCP is a Rails 8.1, API-only service skeleton built on Ruby 3.4.7. It is wired for PostgreSQL, Solid Queue/Cache/Cable, Active Storage, Thruster + Puma, and container-first deployment through Kamal. This document explains how to get the application running locally, run the quality gates, and ship it.
 

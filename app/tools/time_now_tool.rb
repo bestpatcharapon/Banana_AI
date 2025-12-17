@@ -3,6 +3,9 @@ class TimeNowTool < MCP::Tool
   description "Get the current time."
 
   def self.call(server_context:)
-    MCP::Tool::Response.new([{ type: "text", text: Time.now.strftime("%Y-%m-%d %H:%M:%S") }])
+    time_data = {
+      "time" => Time.now.strftime("%Y-%m-%d %H:%M:%S")
+    }
+    MCP::Tool::Response.new([{ type: "text", text: time_data.to_json }])
   end
 end

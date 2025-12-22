@@ -39,6 +39,9 @@ gem "mcp", "~> 0.4.0"
 # gem "rack-cors"
 
 group :development, :test do
+  # Load environment variables from .env file
+  gem "dotenv-rails", groups: [:development, :test]
+
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 

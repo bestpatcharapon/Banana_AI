@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Banana AI Chat</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; display: flex; justify-content: center; height: 100vh; margin: 0; }
+    .chat-container { width: 100%; max-width: 600px; background: white; display: flex; flex-direction: column; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .header { padding: 20px; background: #2563eb; color: white; font-weight: bold; text-align: center; }
+    .messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+    .message { max-width: 80%; padding: 10px 15px; border-radius: 15px; line-height: 1.5; white-space: pre-wrap; }
+    .message.user { align-self: flex-end; background: #2563eb; color: white; border-bottom-right-radius: 2px; }
+    .message.assistant { align-self: flex-start; background: #e5e7eb; color: #1f2937; border-bottom-left-radius: 2px; }
+    .input-area { padding: 20px; border-top: 1px solid #eee; display: flex; gap: 10px; }
+    input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 25px; outline: none; }
+    button.send-btn { padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; }
+    button.send-btn:hover { background: #1d4ed8; }
+    
+    .quick-actions { padding: 0 20px 10px 20px; display: flex; gap: 10px; overflow-x: auto; }
+    .quick-btn { padding: 8px 15px; background: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; border-radius: 20px; cursor: pointer; font-size: 0.9em; white-space: nowrap; transition: all 0.2s; }
+    .quick-btn:hover { background: #e5e7eb; border-color: #d1d5db; }
+    
+    .loading { align-self: center; color: #888; font-size: 0.9em; display: none; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="header">Banana AI Assistant 🍌</div>
+    <div class="messages" id="messages">
+      <div class="message assistant">สวัสดีครับ! ผมคือ Banana AI พร้อมช่วยคุณทำงานกับ Azure DevOps ครับ ถามมาได้เลย!</div>
+    </div>
+    
+    <div class="loading" id="loading">Banana AI is thinking...</div>
+    
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <button class="quick-btn" onclick="sendMessage('Banana AI Assistant มีใครทำงานบ้างชื่ออะไรบ้าง')">🍌 ทีม Banana AI</button>
+      <button class="quick-btn" onclick="sendMessage('Banana Test Engineer มีใครทำงานบ้างชื่ออะไรบ้าง')">🧪 ทีม Test Engineer</button>
+      <button class="quick-btn" onclick="sendMessage('ใน bananacoding มีโปรเจกต์อะไรบ้าง')">📂 ดูโปรเจกต์ทั้งหมด</button>
+    </div>
+
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="พิมพ์ข้อความที่นี่..." onkeypress="if(event.key==='Enter') sendMessage()">
+      <button class="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    async function sendMessage(manualText = null) {
+      const input = document.getElementById('userInput');
+      const text = manualText || input.value.trim();
+      
+      if (!text) return;
+
+      addMessage(text, 'user');
+      input.value = ''; // Clear input even if clicked button
+      document.getElementById('loading').style.display = 'block';
+
+      try {
+        const csrfTokenTag = document.querySelector('meta[name="csrf-token"]');
+        const csrfToken = csrfTokenTag ? csrfTokenTag.content : '';
+        
+        if (!csrfToken) {
+            console.warn("CSRF Token not found!");
+        }
+
+        const response = await fetch('/chat/send', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json', 
+            'X-CSRF-Token': csrfToken 
+          },
+          body: JSON.stringify({ message: text })
+        });
+        const data = await response.json();
+        addMessage(data.content, 'assistant');
+      } catch (e) {
+        addMessage('Error: ' + e.message, 'assistant');
+      } finally {
+        document.getElementById('loading').style.display = 'none';
+      }
+    }
+
+    function addMessage(text, role) {
+      const box = document.getElementById('messages');
+      const div = document.createElement('div');
+      div.className = `message ${role}`;
+      // Parse Markdown if it's the assistant
+      if (role === 'assistant') {
+         div.innerHTML = marked.parse(text);
+      } else {
+         div.textContent = text;
+      }
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+  </script>
+</body>
+</html>

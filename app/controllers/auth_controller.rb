@@ -14,22 +14,22 @@ class AuthController < ActionController::Base
     # Note: ไม่เก็บ OAuth token ใน session เพราะใหญ่เกิน 4KB (CookieOverflow)
     # ใช้ PAT จาก ENV แทนสำหรับ Azure DevOps API
     
-    # Redirect to my_tasks page (ใช้ query params แทน flash)
-    redirect_to "/my_tasks.html?logged_in=true&name=#{CGI.escape(auth.info.name || '')}", allow_other_host: true
+    # Redirect to root (Rails view)
+    redirect_to "/?logged_in=true&name=#{CGI.escape(auth.info.name || '')}"
   end
   
   # GET /auth/failure
   # Handle authentication failures
   def failure
     error_message = params[:message] || 'Unknown error'
-    redirect_to "/my_tasks.html?error=#{CGI.escape(error_message)}", allow_other_host: true
+    redirect_to "/?error=#{CGI.escape(error_message)}"
   end
   
   # DELETE /auth/logout
   # Clear session and logout
   def logout
     reset_session
-    redirect_to "/my_tasks.html?logged_out=true", allow_other_host: true
+    redirect_to "/?logged_out=true"
   end
   
   # GET /auth/user

@@ -87,9 +87,12 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: banana_mcp_production
-    username: banana_mcp
-    password: <%= ENV["BANANA_MCP_DATABASE_PASSWORD"] %>
+    <% if ENV["DATABASE_URL"] %>
+    url: <%= ENV["DATABASE_URL"] %>
+    <% else %>
+    adapter: sqlite3
+    database: storage/production.sqlite3
+    <% end %>
   cache:
     <<: *primary_production
     database: banana_mcp_production_cache

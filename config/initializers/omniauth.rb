@@ -7,6 +7,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       client_id: ENV.fetch('AZURE_CLIENT_ID'),
       client_secret: ENV.fetch('AZURE_CLIENT_SECRET'),
       tenant_id: ENV.fetch('AZURE_TENANT_ID'),
+      name: 'microsoft',
       callback_path: '/auth/microsoft/callback',
       scope: 'openid profile email offline_access 499b84ac-1321-427f-aa17-267ca6975798/user_impersonation'
     }

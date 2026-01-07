@@ -11,9 +11,8 @@ class AuthController < ActionController::Base
     session[:user_name] = auth.info.name
     session[:user_id] = auth.uid
     
-    # Store Access Token for Azure DevOps (On-Behalf-Of)
-    # Token นี้ใช้แทน PAT ได้เลย เพราะขอ scope user_impersonation มาแล้ว
-    session[:ado_token] = auth.credentials.token
+    # Note: ไม่เก็บ OAuth token ใน session เพราะใหญ่เกิน 4KB (CookieOverflow)
+    # ใช้ PAT จาก ENV แทนสำหรับ Azure DevOps API
     
     # Redirect to my_tasks page (ใช้ query params แทน flash)
     redirect_to "/my_tasks.html?logged_in=true&name=#{CGI.escape(auth.info.name || '')}", allow_other_host: true

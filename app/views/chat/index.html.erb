@@ -1,101 +1,406 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
-  <title>Banana AI Chat</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🍌 Banana AI - งานของฉัน</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; display: flex; justify-content: center; height: 100vh; margin: 0; }
-    .chat-container { width: 100%; max-width: 600px; background: white; display: flex; flex-direction: column; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    .header { padding: 20px; background: #2563eb; color: white; font-weight: bold; text-align: center; }
-    .messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-    .message { max-width: 80%; padding: 10px 15px; border-radius: 15px; line-height: 1.5; white-space: pre-wrap; }
-    .message.user { align-self: flex-end; background: #2563eb; color: white; border-bottom-right-radius: 2px; }
-    .message.assistant { align-self: flex-start; background: #e5e7eb; color: #1f2937; border-bottom-left-radius: 2px; }
-    .input-area { padding: 20px; border-top: 1px solid #eee; display: flex; gap: 10px; }
-    input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 25px; outline: none; }
-    button.send-btn { padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; }
-    button.send-btn:hover { background: #1d4ed8; }
-    
-    .quick-actions { padding: 0 20px 10px 20px; display: flex; gap: 10px; overflow-x: auto; }
-    .quick-btn { padding: 8px 15px; background: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; border-radius: 20px; cursor: pointer; font-size: 0.9em; white-space: nowrap; transition: all 0.2s; }
-    .quick-btn:hover { background: #e5e7eb; border-color: #d1d5db; }
-    
-    .loading { align-self: center; color: #888; font-size: 0.9em; display: none; margin-bottom: 10px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #f7d94c, #f5a623);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      color: #8892b0;
+      font-size: 1.1rem;
+    }
+
+    .user-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .user-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f7d94c, #f5a623);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #1a1a2e;
+    }
+
+    .user-info {
+      flex: 1;
+    }
+
+    .user-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+    }
+
+    .user-info p {
+      color: #8892b0;
+      font-size: 0.9rem;
+    }
+
+    .logout-btn {
+      background: rgba(255, 107, 107, 0.2);
+      color: #ff6b6b;
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255, 107, 107, 0.3);
+    }
+
+    .action-button {
+      background: linear-gradient(135deg, #f7d94c 0%, #f5a623 100%);
+      color: #1a1a2e;
+      border: none;
+      padding: 16px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .action-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(247, 217, 76, 0.3);
+    }
+
+    .action-button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .action-button .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #1a1a2e;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      display: none;
+    }
+
+    .action-button.loading .spinner {
+      display: block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .result-container {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      min-height: 300px;
+    }
+
+    .result-container h2 {
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+      color: #f7d94c;
+    }
+
+    .result-content {
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    .result-content h2, .result-content h3 {
+      color: #f7d94c;
+      margin: 20px 0 10px;
+    }
+
+    .result-content strong {
+      color: #64ffda;
+    }
+
+    .placeholder {
+      text-align: center;
+      color: #8892b0;
+      padding: 60px 20px;
+    }
+
+    .placeholder .icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+
+    .login-section {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .login-btn {
+      background: #0078d4;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background: #106ebe;
+      transform: translateY(-2px);
+    }
+
+    .timestamp {
+      text-align: right;
+      color: #8892b0;
+      font-size: 0.8rem;
+      margin-top: 20px;
+    }
+
+    /* Chat Link */
+    .chat-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .chat-link a {
+      color: #64ffda;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .chat-link a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
-  <div class="chat-container">
-    <div class="header">Banana AI Assistant 🍌</div>
-    <div class="messages" id="messages">
-      <div class="message assistant">สวัสดีครับ! ผมคือ Banana AI พร้อมช่วยคุณทำงานกับ Azure DevOps ครับ ถามมาได้เลย!</div>
-    </div>
-    
-    <div class="loading" id="loading">Banana AI is thinking...</div>
-    
-    <!-- Quick Actions -->
-    <div class="quick-actions">
-      <button class="quick-btn" onclick="sendMessage('ดูงาน Active ใน Banana AI Assistant')">🍌 งาน Active - Banana AI</button>
-      <button class="quick-btn" onclick="sendMessage('ดูงาน Active ใน Banana Test Engineer')">🧪 งาน Active - Test Engineer</button>
-      <button class="quick-btn" onclick="sendMessage('ใน bananacoding มีโปรเจกต์อะไรบ้าง')">📂 ดูโปรเจกต์ทั้งหมด</button>
+  <div class="container">
+    <div class="header">
+      <h1>🍌 Banana AI Assistant</h1>
+      <p>ดึงงาน Active ของคุณจาก Azure DevOps</p>
     </div>
 
-    <div class="input-area">
-      <input type="text" id="userInput" placeholder="พิมพ์ข้อความที่นี่..." onkeypress="if(event.key==='Enter') sendMessage()">
-      <button class="send-btn" onclick="sendMessage()">Send</button>
+    <div class="user-card">
+      <div class="user-avatar" id="userAvatar">?</div>
+      <div class="user-info">
+        <h3 id="userName">กรุณา Login</h3>
+        <p id="userEmail">คลิกปุ่มด้านล่างเพื่อ Login ด้วย Microsoft 365</p>
+      </div>
+      <button class="logout-btn" id="logoutBtn" onclick="logout()" style="display: none;">
+        ออกจากระบบ
+      </button>
+    </div>
+
+    <!-- Login Button (แสดงเมื่อยังไม่ได้ login) -->
+    <div id="loginSection" class="login-section">
+      <button class="login-btn" onclick="window.location.href='/auth/microsoft'">
+        <svg width="20" height="20" viewBox="0 0 21 21" fill="currentColor">
+          <rect width="10" height="10" fill="#f25022"/>
+          <rect x="11" width="10" height="10" fill="#7fba00"/>
+          <rect y="11" width="10" height="10" fill="#00a4ef"/>
+          <rect x="11" y="11" width="10" height="10" fill="#ffb900"/>
+        </svg>
+        Login ด้วย Microsoft 365
+      </button>
+    </div>
+
+    <!-- Fetch Button (แสดงเมื่อ login แล้ว) -->
+    <button class="action-button" id="fetchBtn" onclick="fetchMyTasks()" style="display: none;">
+      <span class="spinner"></span>
+      <span class="btn-text">📋 ดึงงาน Active ของฉัน</span>
+    </button>
+
+    <div class="result-container">
+      <h2>📊 ผลลัพธ์</h2>
+      <div class="result-content" id="resultContent">
+        <div class="placeholder">
+          <div class="icon">🔐</div>
+          <p>กรุณา Login ด้วย Microsoft 365 ก่อน</p>
+        </div>
+      </div>
+      <div class="timestamp" id="timestamp"></div>
+    </div>
+
+    <div class="chat-link">
+      <a href="/chat">💬 ไปหน้า Chat กับ AI</a>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-    async function sendMessage(manualText = null) {
-      const input = document.getElementById('userInput');
-      const text = manualText || input.value.trim();
-      
-      if (!text) return;
+    // ตรวจสอบว่า login แล้วหรือยัง
+    async function checkLoginStatus() {
+      try {
+        const response = await fetch('/auth/user', { credentials: 'include' });
+        const data = await response.json();
+        
+        if (data.logged_in) {
+          showLoggedInState(data.name, data.email);
+        } else {
+          showLoggedOutState();
+        }
+      } catch (error) {
+        // ถ้าเรียก API ไม่ได้ ลองดู URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('logged_in') === 'true') {
+          const name = urlParams.get('name') || 'User';
+          showLoggedInState(name, '');
+        } else {
+          showLoggedOutState();
+        }
+      }
+    }
 
-      addMessage(text, 'user');
-      input.value = ''; // Clear input even if clicked button
-      document.getElementById('loading').style.display = 'block';
+    function showLoggedInState(name, email) {
+      document.getElementById('userName').textContent = name;
+      document.getElementById('userEmail').textContent = email || 'กดปุ่มด้านล่างเพื่อดึงงานของคุณ';
+      document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
+      document.getElementById('loginSection').style.display = 'none';
+      document.getElementById('fetchBtn').style.display = 'flex';
+      document.getElementById('logoutBtn').style.display = 'block';
+      document.getElementById('resultContent').innerHTML = `
+        <div class="placeholder">
+          <div class="icon">📋</div>
+          <p>กดปุ่ม "ดึงงาน Active ของฉัน" เพื่อดูงานที่ Assigned ให้คุณ</p>
+        </div>
+      `;
+      
+      // เก็บชื่อไว้ใช้
+      window.currentUserName = name;
+    }
+
+    function showLoggedOutState() {
+      document.getElementById('userName').textContent = 'กรุณา Login';
+      document.getElementById('userEmail').textContent = 'คลิกปุ่มด้านล่างเพื่อ Login ด้วย Microsoft 365';
+      document.getElementById('userAvatar').textContent = '?';
+      document.getElementById('loginSection').style.display = 'block';
+      document.getElementById('fetchBtn').style.display = 'none';
+      document.getElementById('logoutBtn').style.display = 'none';
+    }
+
+    function logout() {
+      window.location.href = '/auth/logout';
+    }
+
+    async function fetchMyTasks() {
+      const btn = document.getElementById('fetchBtn');
+      const resultContent = document.getElementById('resultContent');
+      const timestamp = document.getElementById('timestamp');
+
+      // Show loading
+      btn.classList.add('loading');
+      btn.disabled = true;
+      resultContent.innerHTML = '<div class="placeholder"><div class="icon">⏳</div><p>กำลังดึงข้อมูลจาก Azure DevOps...</p></div>';
 
       try {
-        const csrfTokenTag = document.querySelector('meta[name="csrf-token"]');
-        const csrfToken = csrfTokenTag ? csrfTokenTag.content : '';
-        
-        if (!csrfToken) {
-            console.warn("CSRF Token not found!");
+        // ใช้ /api/my_tasks ที่ใช้ session (ถ้า session ไม่ทำงาน fallback ไป demo)
+        let response = await fetch('/api/my_tasks', { credentials: 'include' });
+        let data = await response.json();
+
+        // ถ้า session ไม่ทำงาน (401) ใช้ demo แทน
+        if (response.status === 401 && window.currentUserName) {
+          response = await fetch('/api/my_tasks/demo', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_name: window.currentUserName })
+          });
+          data = await response.json();
         }
 
-        const response = await fetch('/chat/send', {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json', 
-            'X-CSRF-Token': csrfToken 
-          },
-          body: JSON.stringify({ message: text })
-        });
-        const data = await response.json();
-        addMessage(data.content, 'assistant');
-      } catch (e) {
-        addMessage('Error: ' + e.message, 'assistant');
+        if (data.error) {
+          resultContent.innerHTML = `<div class="placeholder">
+            <div class="icon">❌</div>
+            <p>${data.error}</p>
+          </div>`;
+        } else {
+          // Format markdown to HTML
+          let content = data.content
+            .replace(/^### (.*)$/gm, '<h3>$1</h3>')
+            .replace(/^## (.*)$/gm, '<h2>$1</h2>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/^---$/gm, '<hr style="border: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">')
+            .replace(/\n/g, '<br>')
+            .replace(/<\/h2><br>/g, '</h2>')
+            .replace(/<\/h3><br>/g, '</h3>')
+            .replace(/<hr[^>]*><br>/g, '<hr style="border: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">');
+          
+          resultContent.innerHTML = content;
+          timestamp.textContent = `อัปเดตล่าสุด: ${new Date(data.timestamp).toLocaleString('th-TH')}`;
+        }
+      } catch (error) {
+        resultContent.innerHTML = `<div class="placeholder">
+          <div class="icon">❌</div>
+          <p>เกิดข้อผิดพลาด: ${error.message}</p>
+          <p style="margin-top: 10px; font-size: 0.9rem; color: #ff6b6b;">กรุณาตรวจสอบว่า Rails server ทำงานอยู่</p>
+        </div>`;
       } finally {
-        document.getElementById('loading').style.display = 'none';
+        btn.classList.remove('loading');
+        btn.disabled = false;
       }
     }
 
-    function addMessage(text, role) {
-      const box = document.getElementById('messages');
-      const div = document.createElement('div');
-      div.className = `message ${role}`;
-      // Parse Markdown if it's the assistant
-      if (role === 'assistant') {
-         div.innerHTML = marked.parse(text);
-      } else {
-         div.textContent = text;
-      }
-      box.appendChild(div);
-      box.scrollTop = box.scrollHeight;
-    }
+    // เรียกตอนโหลดหน้า
+    checkLoginStatus();
   </script>
 </body>
 </html>

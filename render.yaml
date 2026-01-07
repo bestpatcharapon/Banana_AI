@@ -1,0 +1,43 @@
+databases:
+  - name: banana_db
+    databaseName: banana_mcp
+    user: banana_user
+    plan: free # ใช้ Database ฟรีบน Render (ข้อมูลหายได้ถ้าไม่ได้ active 90 วัน)
+
+services:
+  - type: web
+    name: banana-ai-assistant
+    env: docker
+    plan: free
+    region: singapore # ใกล้ไทยสุด
+    previewEnvironmentSection:
+      enabled: false
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false # ต้องใส่ manual ใน dashboad
+      - key: DATABASE_URL
+        fromDatabase:
+          name: banana_db
+          property: connectionString
+      - key: RAILS_LOG_TO_STDOUT
+        value: "true"
+      - key: RAILS_SERVE_STATIC_FILES # ให้ Rails serve ไฟล์ my_tasks.html
+        value: "true"
+      
+      # --- AI CONFIG ---
+      - key: GROQ_API_KEY
+        sync: false
+
+      # --- AZURE DEVOPS CONFIG ---
+      - key: AZURE_DEVOPS_ORGANIZATION
+        value: bananacoding
+      - key: AZURE_DEVOPS_PAT
+        sync: false
+
+      # --- MICROSOFT AUTH CONFIG ---
+      - key: AZURE_TENANT_ID
+        sync: false
+      - key: AZURE_CLIENT_ID
+        sync: false
+      - key: AZURE_CLIENT_SECRET
+        sync: false

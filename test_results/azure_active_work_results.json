@@ -1,0 +1,1041 @@
+{
+  "evalId": "eval-ZnC-2026-01-07T04:03:07",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-01-07T04:03:07.020Z",
+    "prompts": [
+      {
+        "raw": "{{user_message}}",
+        "label": "{{user_message}}",
+        "id": "9aade6f7f6008ee0be3cc067aee1ce8842abaeb0e7a64dfc00d203dd9251b3e8",
+        "provider": "rails-api",
+        "metrics": {
+          "score": 4.285714285714286,
+          "testPassCount": 4,
+          "testFailCount": 1,
+          "testErrorCount": 0,
+          "assertPassCount": 18,
+          "assertFailCount": 2,
+          "totalLatencyMs": 22935,
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 5,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "/[฀-๿]/.test(output)",
+                "weight": 2
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "!/[一-鿿]/.test(output)"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "output.length > 100"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+                "weight": 3
+              }
+            }
+          ]
+        },
+        "id": "8b49d88c-97a6-4fbc-be32-c78f263e08af",
+        "latencyMs": 4599,
+        "namedScores": {},
+        "prompt": {
+          "raw": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย",
+          "label": "{{user_message}}"
+        },
+        "promptId": "9aade6f7f6008ee0be3cc067aee1ce8842abaeb0e7a64dfc00d203dd9251b3e8",
+        "promptIdx": 0,
+        "provider": {
+          "id": "http://localhost:3000/chat/send",
+          "label": "rails-api"
+        },
+        "response": {
+          "raw": "{\"role\":\"assistant\",\"content\":\"## 📊 สรุปงาน Active จากทุกโปรเจค\\n\\nมีทั้งหมด 3 โปรเจค: Banana Bootcamp, Banana Test Engineer และ Banana AI Assistant\\n\\n### Banana Bootcamp - มีงาน Active 5 งาน\\n#### **#14775** [Task] สร้างแสดงตารางรายการ Product\\n  สถานะ: Active | Sprint: 11-13 | ผู้รับผิดชอบ: Nampheung Chuatay\\n#### **#14768** [Task] ออกแบบตารางฐานข้อมูลของUser\\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\\n#### **#14774** [Task] ออกแบบหน้าแสดงผล Product\\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Piyachat Seeda\\n#### **#14769** [Task] รับข้อมูลจาก User\\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\\n#### **#14772** [Task] สร้างฟอร์มกรอกข้อมูล POC ให้ผู้ดูแลระบบกรอกรายละเอียดที่ต้องการ\\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sirikorn Ketsaraporn\\n\\n### Banana Test Engineer - มีงาน Active 13 งาน\\n#### **#21179** [Task] 14720 + 14722 19792 HARMONIE DID changes to new buttons pop-up with estate lists\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\\n#### **#21163** [Task] Test apk version 1.1.4\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n#### **#21110** [Task] R&D - how to test AI(LLM)\\n  สถานะ: Active | Sprint: 4 Dec | ผู้รับผิดชอบ: Patcharapon Yoriya\\n#### **#20822** [Task] TE - Provide and Excute test\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\\n#### **#20897** [Task] Support Synerland - TE\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n#### **#21124** [Task] Recheck bug of client version 1.13\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n#### **#21133** [Task] transfer knowledge - Rehub\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\\n#### **#20867** [Task] [Docker]TestRegression\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\\n#### **#20086** [Task] Execute test - Nat (จ-ศ)\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Nattapon Deebang\\n#### **#19494** [Task] Test Website on Prod and Recheck test case\\n  สถานะ: Active | Sprint: Banana Test Engineer | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n#### **#20785** [Task] [1.6] Full manual test\\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\\n#### **#19765** [Task] update automate - 1.6.0\\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\\n#### **#20617** [Task] [1.6.3] Execute Test - Card\\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\\n\\n### Banana AI Assistant - มีงาน Active 3 งาน\\n#### **#21173** [Task] Research antropic SDK\\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Jessada Boonta\\n#### **#21180** [Task] Pastel Database\\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\\n#### **#21154** [Task] Research mcp client Claude API\\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\\n\\n---\"}",
+          "latencyMs": 4590,
+          "cached": false,
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "cache-control": "max-age=0, private, must-revalidate",
+                "content-length": "3993",
+                "content-type": "application/json; charset=utf-8",
+                "etag": "W/\"a895146b8133d280e9b983d4fa6c7164\"",
+                "referrer-policy": "strict-origin-when-cross-origin",
+                "server-timing": "start_processing.action_controller;dur=0.02, process_action.action_controller;dur=4502.54",
+                "vary": "Accept",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "SAMEORIGIN",
+                "x-permitted-cross-domain-policies": "none",
+                "x-request-id": "583d7ec7-3f4f-483d-925d-7da27149ec66",
+                "x-runtime": "4.582306",
+                "x-xss-protection": "0"
+              }
+            }
+          },
+          "output": "## 📊 สรุปงาน Active จากทุกโปรเจค\n\nมีทั้งหมด 3 โปรเจค: Banana Bootcamp, Banana Test Engineer และ Banana AI Assistant\n\n### Banana Bootcamp - มีงาน Active 5 งาน\n#### **#14775** [Task] สร้างแสดงตารางรายการ Product\n  สถานะ: Active | Sprint: 11-13 | ผู้รับผิดชอบ: Nampheung Chuatay\n#### **#14768** [Task] ออกแบบตารางฐานข้อมูลของUser\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\n#### **#14774** [Task] ออกแบบหน้าแสดงผล Product\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Piyachat Seeda\n#### **#14769** [Task] รับข้อมูลจาก User\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\n#### **#14772** [Task] สร้างฟอร์มกรอกข้อมูล POC ให้ผู้ดูแลระบบกรอกรายละเอียดที่ต้องการ\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sirikorn Ketsaraporn\n\n### Banana Test Engineer - มีงาน Active 13 งาน\n#### **#21179** [Task] 14720 + 14722 19792 HARMONIE DID changes to new buttons pop-up with estate lists\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\n#### **#21163** [Task] Test apk version 1.1.4\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n#### **#21110** [Task] R&D - how to test AI(LLM)\n  สถานะ: Active | Sprint: 4 Dec | ผู้รับผิดชอบ: Patcharapon Yoriya\n#### **#20822** [Task] TE - Provide and Excute test\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\n#### **#20897** [Task] Support Synerland - TE\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n#### **#21124** [Task] Recheck bug of client version 1.13\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n#### **#21133** [Task] transfer knowledge - Rehub\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\n#### **#20867** [Task] [Docker]TestRegression\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\n#### **#20086** [Task] Execute test - Nat (จ-ศ)\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Nattapon Deebang\n#### **#19494** [Task] Test Website on Prod and Recheck test case\n  สถานะ: Active | Sprint: Banana Test Engineer | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n#### **#20785** [Task] [1.6] Full manual test\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\n#### **#19765** [Task] update automate - 1.6.0\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\n#### **#20617** [Task] [1.6.3] Execute Test - Card\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\n\n### Banana AI Assistant - มีงาน Active 3 งาน\n#### **#21173** [Task] Research antropic SDK\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Jessada Boonta\n#### **#21180** [Task] Pastel Database\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\n#### **#21154** [Task] Research mcp client Claude API\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\n\n---",
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค",
+          "vars": {
+            "user_message": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "/[฀-๿]/.test(output)",
+              "weight": 2
+            },
+            {
+              "type": "javascript",
+              "value": "!/[一-鿿]/.test(output)"
+            },
+            {
+              "type": "javascript",
+              "value": "output.length > 100"
+            },
+            {
+              "type": "javascript",
+              "value": "/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+              "weight": 3
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "user_message": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "cache-control": "max-age=0, private, must-revalidate",
+              "content-length": "3993",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"a895146b8133d280e9b983d4fa6c7164\"",
+              "referrer-policy": "strict-origin-when-cross-origin",
+              "server-timing": "start_processing.action_controller;dur=0.02, process_action.action_controller;dur=4502.54",
+              "vary": "Accept",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "x-permitted-cross-domain-policies": "none",
+              "x-request-id": "583d7ec7-3f4f-483d-925d-7da27149ec66",
+              "x-runtime": "4.582306",
+              "x-xss-protection": "0"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "/[฀-๿]/.test(output)",
+                "weight": 2
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "!/[一-鿿]/.test(output)"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "output.length > 100"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+                "weight": 3
+              }
+            }
+          ]
+        },
+        "id": "df41d4f2-f5fb-4c93-9eef-6890659fd520",
+        "latencyMs": 5730,
+        "namedScores": {},
+        "prompt": {
+          "raw": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย",
+          "label": "{{user_message}}"
+        },
+        "promptId": "9aade6f7f6008ee0be3cc067aee1ce8842abaeb0e7a64dfc00d203dd9251b3e8",
+        "promptIdx": 0,
+        "provider": {
+          "id": "http://localhost:3000/chat/send",
+          "label": "rails-api"
+        },
+        "response": {
+          "raw": "{\"role\":\"assistant\",\"content\":\"## 📊 สรุปงาน Active จากทุกโปรเจค\\n\\nมีทั้งหมด 3 โปรเจค:\\n\\n### 1. Banana Bootcamp - มีงาน Active 5 งาน\\n#### 📁 Banana Bootcamp\\n- **#14775** [Task] สร้างแสดงตารางรายการ Product\\n  สถานะ: Active | Sprint: 11-13 | ผู้รับผิดชอบ: Nampheung Chuatay\\n- **#14768** [Task] ออกแบบตารางฐานข้อมูลของUser\\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\\n- **#14774** [Task] ออกแบบหน้าแสดงผล Product\\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Piyachat Seeda\\n- **#14769** [Task] รับข้อมูลจาก User\\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\\n- **#14772** [Task] สร้างฟอร์มกรอกข้อมูล POC ให้ผู้ดูแลระบบกรอกรายละเอียดที่ต้องการ\\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sirikorn Ketsaraporn\\n\\n### 2. Banana Test Engineer - มีงาน Active 13 งาน\\n#### 📁 Banana Test Engineer\\n- **#21179** [Task] 14720 + 14722 19792 HARMONIE DID changes to new buttons pop-up with estate lists\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\\n- **#21163** [Task] Test apk version 1.1.4\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n- **#21110** [Task] R&D - how to test AI(LLM)\\n  สถานะ: Active | Sprint: 4 Dec | ผู้รับผิดชอบ: Patcharapon Yoriya\\n- **#20822** [Task] TE - Provide and Excute test\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\\n- **#20897** [Task] Support Synerland - TE\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n- **#21124** [Task] Recheck bug of client version 1.13\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n- **#21133** [Task] transfer knowledge - Rehub\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\\n- **#20867** [Task] [Docker]TestRegression\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\\n- **#20086** [Task] Execute test - Nat (จ-ศ)\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Nattapon Deebang\\n- **#19494** [Task] Test Website on Prod and Recheck test case\\n  สถานะ: Active | Sprint: Banana Test Engineer | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n- **#20785** [Task] [1.6] Full manual test\\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\\n- **#19765** [Task] update automate - 1.6.0\\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\\n- **#20617** [Task] [1.6.3] Execute Test - Card\\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\\n\\n### 3. Banana AI Assistant - มีงาน Active 3 งาน\\n#### 📁 Banana AI Assistant\\n- **#21173** [Task] Research antropic SDK\\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Jessada Boonta\\n- **#21180** [Task] Pastel Database\\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\\n- **#21154** [Task] Research mcp client Claude API\\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\\n\\n---\\n\\n## 🔥 งานสำคัญ (Critical Tasks)\\n#### 📍 Banana Test Engineer\\n- **#21179** [Task] 14720 + 14722 19792 HARMONIE DID changes to new buttons pop-up with estate lists\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\\n- **#20867** [Task] [Docker]TestRegression\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\\n- **#20785** [Task] [1.6] Full manual test\\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\"}",
+          "latencyMs": 5720,
+          "cached": false,
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "cache-control": "max-age=0, private, must-revalidate",
+                "content-length": "4546",
+                "content-type": "application/json; charset=utf-8",
+                "etag": "W/\"815f737aa622e320cf4dd0a9bfff6ee8\"",
+                "referrer-policy": "strict-origin-when-cross-origin",
+                "server-timing": "start_processing.action_controller;dur=0.01, process_action.action_controller;dur=5713.57",
+                "vary": "Accept",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "SAMEORIGIN",
+                "x-permitted-cross-domain-policies": "none",
+                "x-request-id": "58bdda87-4966-45ee-8f92-534a0b5b22e6",
+                "x-runtime": "5.715145",
+                "x-xss-protection": "0"
+              }
+            }
+          },
+          "output": "## 📊 สรุปงาน Active จากทุกโปรเจค\n\nมีทั้งหมด 3 โปรเจค:\n\n### 1. Banana Bootcamp - มีงาน Active 5 งาน\n#### 📁 Banana Bootcamp\n- **#14775** [Task] สร้างแสดงตารางรายการ Product\n  สถานะ: Active | Sprint: 11-13 | ผู้รับผิดชอบ: Nampheung Chuatay\n- **#14768** [Task] ออกแบบตารางฐานข้อมูลของUser\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\n- **#14774** [Task] ออกแบบหน้าแสดงผล Product\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Piyachat Seeda\n- **#14769** [Task] รับข้อมูลจาก User\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\n- **#14772** [Task] สร้างฟอร์มกรอกข้อมูล POC ให้ผู้ดูแลระบบกรอกรายละเอียดที่ต้องการ\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sirikorn Ketsaraporn\n\n### 2. Banana Test Engineer - มีงาน Active 13 งาน\n#### 📁 Banana Test Engineer\n- **#21179** [Task] 14720 + 14722 19792 HARMONIE DID changes to new buttons pop-up with estate lists\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\n- **#21163** [Task] Test apk version 1.1.4\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n- **#21110** [Task] R&D - how to test AI(LLM)\n  สถานะ: Active | Sprint: 4 Dec | ผู้รับผิดชอบ: Patcharapon Yoriya\n- **#20822** [Task] TE - Provide and Excute test\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\n- **#20897** [Task] Support Synerland - TE\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n- **#21124** [Task] Recheck bug of client version 1.13\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n- **#21133** [Task] transfer knowledge - Rehub\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\n- **#20867** [Task] [Docker]TestRegression\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\n- **#20086** [Task] Execute test - Nat (จ-ศ)\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Nattapon Deebang\n- **#19494** [Task] Test Website on Prod and Recheck test case\n  สถานะ: Active | Sprint: Banana Test Engineer | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n- **#20785** [Task] [1.6] Full manual test\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\n- **#19765** [Task] update automate - 1.6.0\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\n- **#20617** [Task] [1.6.3] Execute Test - Card\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\n\n### 3. Banana AI Assistant - มีงาน Active 3 งาน\n#### 📁 Banana AI Assistant\n- **#21173** [Task] Research antropic SDK\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Jessada Boonta\n- **#21180** [Task] Pastel Database\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\n- **#21154** [Task] Research mcp client Claude API\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\n\n---\n\n## 🔥 งานสำคัญ (Critical Tasks)\n#### 📍 Banana Test Engineer\n- **#21179** [Task] 14720 + 14722 19792 HARMONIE DID changes to new buttons pop-up with estate lists\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\n- **#20867** [Task] [Docker]TestRegression\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\n- **#20785** [Task] [1.6] Full manual test\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan",
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค",
+          "vars": {
+            "user_message": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "/[฀-๿]/.test(output)",
+              "weight": 2
+            },
+            {
+              "type": "javascript",
+              "value": "!/[一-鿿]/.test(output)"
+            },
+            {
+              "type": "javascript",
+              "value": "output.length > 100"
+            },
+            {
+              "type": "javascript",
+              "value": "/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+              "weight": 3
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "user_message": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "cache-control": "max-age=0, private, must-revalidate",
+              "content-length": "4546",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"815f737aa622e320cf4dd0a9bfff6ee8\"",
+              "referrer-policy": "strict-origin-when-cross-origin",
+              "server-timing": "start_processing.action_controller;dur=0.01, process_action.action_controller;dur=5713.57",
+              "vary": "Accept",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "x-permitted-cross-domain-policies": "none",
+              "x-request-id": "58bdda87-4966-45ee-8f92-534a0b5b22e6",
+              "x-runtime": "5.715145",
+              "x-xss-protection": "0"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "/[฀-๿]/.test(output)",
+                "weight": 2
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "!/[一-鿿]/.test(output)"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "output.length > 100"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+                "weight": 3
+              }
+            }
+          ]
+        },
+        "id": "996c0649-4c6b-4f76-8c9c-27938a96b084",
+        "latencyMs": 4691,
+        "namedScores": {},
+        "prompt": {
+          "raw": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย",
+          "label": "{{user_message}}"
+        },
+        "promptId": "9aade6f7f6008ee0be3cc067aee1ce8842abaeb0e7a64dfc00d203dd9251b3e8",
+        "promptIdx": 0,
+        "provider": {
+          "id": "http://localhost:3000/chat/send",
+          "label": "rails-api"
+        },
+        "response": {
+          "raw": "{\"role\":\"assistant\",\"content\":\"## 📊 สรุปงาน Active จากทุกโปรเจค\\n\\nมีทั้งหมด 3 โปรเจค:\\n\\n### 1. Banana Bootcamp - มีงาน Active 5 งาน\\n#### **#14775** [Task] สร้างแสดงตารางรายการ Product\\n- สถานะ: Active | Sprint: 11-13 | ผู้รับผิดชอบ: Nampheung Chuatay\\n#### **#14768** [Task] ออกแบบตารางฐานข้อมูลของUser\\n- สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\\n#### **#14774** [Task] ออกแบบหน้าแสดงผล Product\\n- สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Piyachat Seeda\\n#### **#14769** [Task] รับข้อมูลจาก User\\n- สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\\n#### **#14772** [Task] สร้างฟอร์มกรอกข้อมูล POC ให้ผู้ดูแลระบบกรอกรายละเอียดที่ต้องการ\\n- สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sirikorn Ketsaraporn\\n\\n### 2. Banana Test Engineer - มีงาน Active 13 งาน\\n#### **#21179** [Task] 14720 + 14722 19792 HARMONIE DID changes to new buttons pop-up with estate lists\\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\\n#### **#21163** [Task] Test apk version 1.1.4\\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n#### **#21110** [Task] R&D - how to test AI(LLM)\\n- สถานะ: Active | Sprint: 4 Dec | ผู้รับผิดชอบ: Patcharapon Yoriya\\n#### **#20822** [Task] TE - Provide and Excute test\\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\\n#### **#20897** [Task] Support Synerland - TE\\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n#### **#21124** [Task] Recheck bug of client version 1.13\\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n#### **#21133** [Task] transfer knowledge - Rehub\\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\\n#### **#20867** [Task] [Docker]TestRegression\\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\\n#### **#20086** [Task] Execute test - Nat (จ-ศ)\\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Nattapon Deebang\\n#### **#19494** [Task] Test Website on Prod and Recheck test case\\n- สถานะ: Active | Sprint: Banana Test Engineer | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n#### **#20785** [Task] [1.6] Full manual test\\n- สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\\n#### **#19765** [Task] update automate - 1.6.0\\n- สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\\n#### **#20617** [Task] [1.6.3] Execute Test - Card\\n- สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\\n\\n### 3. Banana AI Assistant - มีงาน Active 3 งาน\\n#### **#21173** [Task] Research antropic SDK\\n- สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Jessada Boonta\\n#### **#21180** [Task] Pastel Database\\n- สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\\n#### **#21154** [Task] Research mcp client Claude API\\n- สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\\n\\n---\\n\\n## 🔥 งานสำคัญ (Critical Tasks)\\n#### **#21154** [Task] Research mcp client Claude API\\n- สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\\n#### **#20822** [Task] TE - Provide and Excute test\\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\\n#### **#21133** [Task] transfer knowledge - Rehub\\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\"}",
+          "latencyMs": 4685,
+          "cached": false,
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "cache-control": "max-age=0, private, must-revalidate",
+                "content-length": "4455",
+                "content-type": "application/json; charset=utf-8",
+                "etag": "W/\"bf1f8c166fe56b46eb632f7e3b4697a4\"",
+                "referrer-policy": "strict-origin-when-cross-origin",
+                "server-timing": "start_processing.action_controller;dur=0.01, process_action.action_controller;dur=4678.70",
+                "vary": "Accept",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "SAMEORIGIN",
+                "x-permitted-cross-domain-policies": "none",
+                "x-request-id": "59e076f8-81e1-4518-9202-11bcfab4e7ea",
+                "x-runtime": "4.680648",
+                "x-xss-protection": "0"
+              }
+            }
+          },
+          "output": "## 📊 สรุปงาน Active จากทุกโปรเจค\n\nมีทั้งหมด 3 โปรเจค:\n\n### 1. Banana Bootcamp - มีงาน Active 5 งาน\n#### **#14775** [Task] สร้างแสดงตารางรายการ Product\n- สถานะ: Active | Sprint: 11-13 | ผู้รับผิดชอบ: Nampheung Chuatay\n#### **#14768** [Task] ออกแบบตารางฐานข้อมูลของUser\n- สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\n#### **#14774** [Task] ออกแบบหน้าแสดงผล Product\n- สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Piyachat Seeda\n#### **#14769** [Task] รับข้อมูลจาก User\n- สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\n#### **#14772** [Task] สร้างฟอร์มกรอกข้อมูล POC ให้ผู้ดูแลระบบกรอกรายละเอียดที่ต้องการ\n- สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sirikorn Ketsaraporn\n\n### 2. Banana Test Engineer - มีงาน Active 13 งาน\n#### **#21179** [Task] 14720 + 14722 19792 HARMONIE DID changes to new buttons pop-up with estate lists\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\n#### **#21163** [Task] Test apk version 1.1.4\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n#### **#21110** [Task] R&D - how to test AI(LLM)\n- สถานะ: Active | Sprint: 4 Dec | ผู้รับผิดชอบ: Patcharapon Yoriya\n#### **#20822** [Task] TE - Provide and Excute test\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\n#### **#20897** [Task] Support Synerland - TE\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n#### **#21124** [Task] Recheck bug of client version 1.13\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n#### **#21133** [Task] transfer knowledge - Rehub\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\n#### **#20867** [Task] [Docker]TestRegression\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\n#### **#20086** [Task] Execute test - Nat (จ-ศ)\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Nattapon Deebang\n#### **#19494** [Task] Test Website on Prod and Recheck test case\n- สถานะ: Active | Sprint: Banana Test Engineer | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n#### **#20785** [Task] [1.6] Full manual test\n- สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\n#### **#19765** [Task] update automate - 1.6.0\n- สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\n#### **#20617** [Task] [1.6.3] Execute Test - Card\n- สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\n\n### 3. Banana AI Assistant - มีงาน Active 3 งาน\n#### **#21173** [Task] Research antropic SDK\n- สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Jessada Boonta\n#### **#21180** [Task] Pastel Database\n- สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\n#### **#21154** [Task] Research mcp client Claude API\n- สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\n\n---\n\n## 🔥 งานสำคัญ (Critical Tasks)\n#### **#21154** [Task] Research mcp client Claude API\n- สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\n#### **#20822** [Task] TE - Provide and Excute test\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\n#### **#21133** [Task] transfer knowledge - Rehub\n- สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen",
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค",
+          "vars": {
+            "user_message": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "/[฀-๿]/.test(output)",
+              "weight": 2
+            },
+            {
+              "type": "javascript",
+              "value": "!/[一-鿿]/.test(output)"
+            },
+            {
+              "type": "javascript",
+              "value": "output.length > 100"
+            },
+            {
+              "type": "javascript",
+              "value": "/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+              "weight": 3
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "vars": {
+          "user_message": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "cache-control": "max-age=0, private, must-revalidate",
+              "content-length": "4455",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"bf1f8c166fe56b46eb632f7e3b4697a4\"",
+              "referrer-policy": "strict-origin-when-cross-origin",
+              "server-timing": "start_processing.action_controller;dur=0.01, process_action.action_controller;dur=4678.70",
+              "vary": "Accept",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "x-permitted-cross-domain-policies": "none",
+              "x-request-id": "59e076f8-81e1-4518-9202-11bcfab4e7ea",
+              "x-runtime": "4.680648",
+              "x-xss-protection": "0"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function returned false\n/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.2857142857142857,
+          "reason": "Custom function returned false\n/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\n/[฀-๿]/.test(output)",
+              "assertion": {
+                "type": "javascript",
+                "value": "/[฀-๿]/.test(output)",
+                "weight": 2
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "!/[一-鿿]/.test(output)"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "output.length > 100"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\n/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+              "assertion": {
+                "type": "javascript",
+                "value": "/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+                "weight": 3
+              }
+            }
+          ]
+        },
+        "id": "46e9afb4-ce30-481a-94a1-079dde3352ef",
+        "latencyMs": 3376,
+        "namedScores": {},
+        "prompt": {
+          "raw": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย",
+          "label": "{{user_message}}"
+        },
+        "promptId": "9aade6f7f6008ee0be3cc067aee1ce8842abaeb0e7a64dfc00d203dd9251b3e8",
+        "promptIdx": 0,
+        "provider": {
+          "id": "http://localhost:3000/chat/send",
+          "label": "rails-api"
+        },
+        "response": {
+          "raw": "{\"role\":\"assistant\",\"content\":\"Groq API Error: 429 Too Many Requests - {\\\"error\\\":{\\\"message\\\":\\\"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbfy3ke0eypv9vb95m5v2ynw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5188, Requested 1578. Please try again in 7.66s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\\\",\\\"type\\\":\\\"tokens\\\",\\\"code\\\":\\\"rate_limit_exceeded\\\"}}\\n\"}",
+          "latencyMs": 3369,
+          "cached": false,
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "cache-control": "max-age=0, private, must-revalidate",
+                "content-length": "466",
+                "content-type": "application/json; charset=utf-8",
+                "etag": "W/\"a6a107ca0216ef21b5761347d30311c5\"",
+                "referrer-policy": "strict-origin-when-cross-origin",
+                "server-timing": "start_processing.action_controller;dur=0.01, process_action.action_controller;dur=3359.87",
+                "vary": "Accept",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "SAMEORIGIN",
+                "x-permitted-cross-domain-policies": "none",
+                "x-request-id": "839719c0-b48e-4031-ad0c-b0dcfa0dc3ac",
+                "x-runtime": "3.363643",
+                "x-xss-protection": "0"
+              }
+            }
+          },
+          "output": "Groq API Error: 429 Too Many Requests - {\"error\":{\"message\":\"Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbfy3ke0eypv9vb95m5v2ynw` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5188, Requested 1578. Please try again in 7.66s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          }
+        },
+        "score": 0.2857142857142857,
+        "success": false,
+        "testCase": {
+          "description": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค",
+          "vars": {
+            "user_message": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "/[฀-๿]/.test(output)",
+              "weight": 2
+            },
+            {
+              "type": "javascript",
+              "value": "!/[一-鿿]/.test(output)"
+            },
+            {
+              "type": "javascript",
+              "value": "output.length > 100"
+            },
+            {
+              "type": "javascript",
+              "value": "/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+              "weight": 3
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "vars": {
+          "user_message": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "cache-control": "max-age=0, private, must-revalidate",
+              "content-length": "466",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"a6a107ca0216ef21b5761347d30311c5\"",
+              "referrer-policy": "strict-origin-when-cross-origin",
+              "server-timing": "start_processing.action_controller;dur=0.01, process_action.action_controller;dur=3359.87",
+              "vary": "Accept",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "x-permitted-cross-domain-policies": "none",
+              "x-request-id": "839719c0-b48e-4031-ad0c-b0dcfa0dc3ac",
+              "x-runtime": "3.363643",
+              "x-xss-protection": "0"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "/[฀-๿]/.test(output)",
+                "weight": 2
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "!/[一-鿿]/.test(output)"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "output.length > 100"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+                "weight": 3
+              }
+            }
+          ]
+        },
+        "id": "e0f1aa37-3ef2-490b-9425-1a7c02f5df39",
+        "latencyMs": 4539,
+        "namedScores": {},
+        "prompt": {
+          "raw": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย",
+          "label": "{{user_message}}"
+        },
+        "promptId": "9aade6f7f6008ee0be3cc067aee1ce8842abaeb0e7a64dfc00d203dd9251b3e8",
+        "promptIdx": 0,
+        "provider": {
+          "id": "http://localhost:3000/chat/send",
+          "label": "rails-api"
+        },
+        "response": {
+          "raw": "{\"role\":\"assistant\",\"content\":\"## 📊 สรุปงาน Active จากทุกโปรเจค\\n\\nมีทั้งหมด 3 โปรเจค:\\n\\n### 1. Banana Bootcamp - มีงาน Active 5 งาน\\n• **#14775** [Task] สร้างแสดงตารางรายการ Product\\n  สถานะ: Active | Sprint: 11-13 | ผู้รับผิดชอบ: Nampheung Chuatay\\n• **#14768** [Task] ออกแบบตารางฐานข้อมูลของUser\\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\\n• **#14774** [Task] ออกแบบหน้าแสดงผล Product\\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Piyachat Seeda\\n• **#14769** [Task] รับข้อมูลจาก User\\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\\n• **#14772** [Task] สร้างฟอร์มกรอกข้อมูล POC ให้ผู้ดูแลระบบกรอกรายละเอียดที่ต้องการ\\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sirikorn Ketsaraporn\\n\\n### 2. Banana Test Engineer - มีงาน Active 13 งาน\\n• **#21179** [Task] 14720 + 14722 19792 HARMONIE DID changes to new buttons pop-up with estate lists\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\\n• **#21163** [Task] Test apk version 1.1.4\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n• **#21110** [Task] R&D - how to test AI(LLM)\\n  สถานะ: Active | Sprint: 4 Dec | ผู้รับผิดชอบ: Patcharapon Yoriya\\n• **#20822** [Task] TE - Provide and Excute test\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\\n• **#20897** [Task] Support Synerland - TE\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n• **#21124** [Task] Recheck bug of client version 1.13\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n• **#21133** [Task] transfer knowledge - Rehub\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\\n• **#20867** [Task] [Docker]TestRegression\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\\n• **#20086** [Task] Execute test - Nat (จ-ศ)\\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Nattapon Deebang\\n• **#19494** [Task] Test Website on Prod and Recheck test case\\n  สถานะ: Active | Sprint: Banana Test Engineer | ผู้รับผิดชอบ: Aunyamanee Pukkaew\\n• **#20785** [Task] [1.6] Full manual test\\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\\n• **#19765** [Task] update automate - 1.6.0\\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\\n• **#20617** [Task] [1.6.3] Execute Test - Card\\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\\n\\n### 3. Banana AI Assistant - มีงาน Active 3 งาน\\n• **#21173** [Task] Research antropic SDK\\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Jessada Boonta\\n• **#21180** [Task] Pastel Database\\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\\n• **#21154** [Task] Research mcp client Claude API\\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\\n\\n---\\n\\n## 🔥 งานสำคัญ (Critical Tasks)\\n• **#21154** [Task] Research mcp client Claude API\\n• **#20867** [Task] [Docker]TestRegression\\n• **#21133** [Task] transfer knowledge - Rehub\"}",
+          "latencyMs": 4532,
+          "cached": false,
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "cache-control": "max-age=0, private, must-revalidate",
+                "content-length": "4116",
+                "content-type": "application/json; charset=utf-8",
+                "etag": "W/\"abb18ab14ccebf2bac17bfbc3fe5f45b\"",
+                "referrer-policy": "strict-origin-when-cross-origin",
+                "server-timing": "start_processing.action_controller;dur=0.01, process_action.action_controller;dur=4525.98",
+                "vary": "Accept",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "SAMEORIGIN",
+                "x-permitted-cross-domain-policies": "none",
+                "x-request-id": "d1ed5c7f-12b6-4175-83ba-eef7361dfe64",
+                "x-runtime": "4.528019",
+                "x-xss-protection": "0"
+              }
+            }
+          },
+          "output": "## 📊 สรุปงาน Active จากทุกโปรเจค\n\nมีทั้งหมด 3 โปรเจค:\n\n### 1. Banana Bootcamp - มีงาน Active 5 งาน\n• **#14775** [Task] สร้างแสดงตารางรายการ Product\n  สถานะ: Active | Sprint: 11-13 | ผู้รับผิดชอบ: Nampheung Chuatay\n• **#14768** [Task] ออกแบบตารางฐานข้อมูลของUser\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\n• **#14774** [Task] ออกแบบหน้าแสดงผล Product\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Piyachat Seeda\n• **#14769** [Task] รับข้อมูลจาก User\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sarawut Buakanok\n• **#14772** [Task] สร้างฟอร์มกรอกข้อมูล POC ให้ผู้ดูแลระบบกรอกรายละเอียดที่ต้องการ\n  สถานะ: Active | Sprint: 11-06 | ผู้รับผิดชอบ: Sirikorn Ketsaraporn\n\n### 2. Banana Test Engineer - มีงาน Active 13 งาน\n• **#21179** [Task] 14720 + 14722 19792 HARMONIE DID changes to new buttons pop-up with estate lists\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\n• **#21163** [Task] Test apk version 1.1.4\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n• **#21110** [Task] R&D - how to test AI(LLM)\n  สถานะ: Active | Sprint: 4 Dec | ผู้รับผิดชอบ: Patcharapon Yoriya\n• **#20822** [Task] TE - Provide and Excute test\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Kunchikarn Aongatpol\n• **#20897** [Task] Support Synerland - TE\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n• **#21124** [Task] Recheck bug of client version 1.13\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n• **#21133** [Task] transfer knowledge - Rehub\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\n• **#20867** [Task] [Docker]TestRegression\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Sujaree Khumgoen\n• **#20086** [Task] Execute test - Nat (จ-ศ)\n  สถานะ: Active | Sprint: 19 Dec | ผู้รับผิดชอบ: Nattapon Deebang\n• **#19494** [Task] Test Website on Prod and Recheck test case\n  สถานะ: Active | Sprint: Banana Test Engineer | ผู้รับผิดชอบ: Aunyamanee Pukkaew\n• **#20785** [Task] [1.6] Full manual test\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\n• **#19765** [Task] update automate - 1.6.0\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\n• **#20617** [Task] [1.6.3] Execute Test - Card\n  สถานะ: Active | Sprint: 25 Sep | ผู้รับผิดชอบ: Phatthanan Wannapan\n\n### 3. Banana AI Assistant - มีงาน Active 3 งาน\n• **#21173** [Task] Research antropic SDK\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Jessada Boonta\n• **#21180** [Task] Pastel Database\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\n• **#21154** [Task] Research mcp client Claude API\n  สถานะ: Active | Sprint: 01-05 | ผู้รับผิดชอบ: Phadungkiart Namsai\n\n---\n\n## 🔥 งานสำคัญ (Critical Tasks)\n• **#21154** [Task] Research mcp client Claude API\n• **#20867** [Task] [Docker]TestRegression\n• **#21133** [Task] transfer knowledge - Rehub",
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค",
+          "vars": {
+            "user_message": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "/[฀-๿]/.test(output)",
+              "weight": 2
+            },
+            {
+              "type": "javascript",
+              "value": "!/[一-鿿]/.test(output)"
+            },
+            {
+              "type": "javascript",
+              "value": "output.length > 100"
+            },
+            {
+              "type": "javascript",
+              "value": "/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+              "weight": 3
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "vars": {
+          "user_message": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "cache-control": "max-age=0, private, must-revalidate",
+              "content-length": "4116",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"abb18ab14ccebf2bac17bfbc3fe5f45b\"",
+              "referrer-policy": "strict-origin-when-cross-origin",
+              "server-timing": "start_processing.action_controller;dur=0.01, process_action.action_controller;dur=4525.98",
+              "vary": "Accept",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "x-permitted-cross-domain-policies": "none",
+              "x-request-id": "d1ed5c7f-12b6-4175-83ba-eef7361dfe64",
+              "x-runtime": "4.528019",
+              "x-xss-protection": "0"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 4,
+      "failures": 1,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 0,
+        "completion": 0,
+        "cached": 0,
+        "total": 0,
+        "numRequests": 5,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0
+          }
+        }
+      },
+      "durationMs": 72992
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "Banana AI - ดึงงาน Active จาก Azure DevOps (10 รอบ)",
+    "prompts": [
+      "{{user_message}}"
+    ],
+    "providers": [
+      {
+        "id": "http",
+        "label": "rails-api",
+        "config": {
+          "url": "http://localhost:3000/chat/send",
+          "method": "POST",
+          "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          "body": "message={{prompt}}",
+          "responseParser": "json.content"
+        }
+      }
+    ],
+    "tests": [
+      {
+        "description": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค",
+        "vars": {
+          "user_message": "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย"
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "/[฀-๿]/.test(output)",
+            "weight": 2
+          },
+          {
+            "type": "javascript",
+            "value": "!/[一-鿿]/.test(output)"
+          },
+          {
+            "type": "javascript",
+            "value": "output.length > 100"
+          },
+          {
+            "type": "javascript",
+            "value": "/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)",
+            "weight": 3
+          }
+        ]
+      }
+    ],
+    "scenarios": [],
+    "env": {},
+    "outputPath": [
+      "./test_results/azure_active_work_results.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {
+      "maxConcurrency": 1,
+      "delay": 10000,
+      "repeat": 5
+    }
+  },
+  "shareableUrl": "https://www.promptfoo.app/eval/eval-ZnC-2026-01-07T04:03:07",
+  "metadata": {
+    "promptfooVersion": "0.120.8",
+    "nodeVersion": "v20.19.6",
+    "platform": "linux",
+    "arch": "x64",
+    "exportedAt": "2026-01-07T04:04:22.842Z",
+    "evaluationCreatedAt": "2026-01-07T04:03:07.020Z",
+    "author": "patcharaponyo65@gmail.com"
+  }
+}

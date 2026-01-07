@@ -1,0 +1,45 @@
+# Promptfoo - Azure DevOps Active Work Test
+# คำถามเดียว รัน 10 รอบ เพื่อดูความหลากหลายของคำตอบ
+
+description: "Banana AI - ดึงงาน Active จาก Azure DevOps (10 รอบ)"
+
+evaluateOptions:
+  maxConcurrency: 1
+  delay: 10000
+  repeat: 5
+
+providers:
+  - id: http
+    label: rails-api
+    config:
+      url: http://localhost:3000/chat/send
+      method: POST
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+      body: "message={{prompt}}"
+      responseParser: json.content
+
+prompts:
+  - "{{user_message}}"
+
+tests:
+  - description: "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค"
+    vars:
+      user_message: "ดึงงาน Active จาก Azure DevOps ทุกโปรเจค แสดงรายละเอียดแต่ละงานด้วย"
+    assert:
+      # ต้องมีภาษาไทย
+      - type: javascript
+        value: "/[\u0E00-\u0E7F]/.test(output)"
+        weight: 2
+      # ต้องไม่มีตัวอักษรจีน
+      - type: javascript
+        value: "!/[\u4E00-\u9FFF]/.test(output)"
+      # คำตอบต้องมีความยาวเพียงพอ
+      - type: javascript
+        value: "output.length > 100"
+      # ต้องมี work item ID (เช่น #123) หรือ Task/Bug/User Story
+      - type: javascript
+        value: "/#\\d+/.test(output) || /Task|Bug|User Story|Feature/.test(output) || /งาน Active/.test(output)"
+        weight: 3
+
+outputPath: ./test_results/azure_active_work_results.json

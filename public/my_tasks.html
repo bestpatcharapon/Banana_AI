@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🍌 Banana AI - งานของฉัน</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #f7d94c, #f5a623);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header p {
+      color: #8892b0;
+      font-size: 1.1rem;
+    }
+
+    .user-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .user-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f7d94c, #f5a623);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #1a1a2e;
+    }
+
+    .user-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+    }
+
+    .user-info p {
+      color: #8892b0;
+      font-size: 0.9rem;
+    }
+
+    .action-button {
+      background: linear-gradient(135deg, #f7d94c 0%, #f5a623 100%);
+      color: #1a1a2e;
+      border: none;
+      padding: 16px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .action-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(247, 217, 76, 0.3);
+    }
+
+    .action-button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .action-button .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #1a1a2e;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      display: none;
+    }
+
+    .action-button.loading .spinner {
+      display: block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .result-container {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      min-height: 300px;
+    }
+
+    .result-container h2 {
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+      color: #f7d94c;
+    }
+
+    .result-content {
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    .result-content h2, .result-content h3 {
+      color: #f7d94c;
+      margin: 20px 0 10px;
+    }
+
+    .result-content strong {
+      color: #64ffda;
+    }
+
+    .placeholder {
+      text-align: center;
+      color: #8892b0;
+      padding: 60px 20px;
+    }
+
+    .placeholder .icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+
+    .login-required {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .login-btn {
+      background: #0078d4;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .login-btn:hover {
+      background: #106ebe;
+    }
+
+    .demo-input {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .demo-input input {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+    }
+
+    .demo-input input::placeholder {
+      color: #8892b0;
+    }
+
+    .timestamp {
+      text-align: right;
+      color: #8892b0;
+      font-size: 0.8rem;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🍌 Banana AI Assistant</h1>
+      <p>ดึงงาน Active ของคุณจาก Azure DevOps</p>
+    </div>
+
+    <div class="user-card">
+      <div class="user-avatar" id="userAvatar">?</div>
+      <div class="user-info">
+        <h3 id="userName">กรุณา Login</h3>
+        <p id="userEmail">คลิกปุ่มด้านล่างเพื่อ Login ด้วย Microsoft 365</p>
+      </div>
+      <button class="logout-btn" id="logoutBtn" onclick="logout()" style="display: none;">
+        ออกจากระบบ
+      </button>
+    </div>
+
+    <!-- Login Button (แสดงเมื่อยังไม่ได้ login) -->
+    <div id="loginSection">
+      <button class="login-btn" onclick="window.location.href='http://localhost:3000/auth/azure_activedirectory_v2'">
+        <svg width="20" height="20" viewBox="0 0 21 21" fill="currentColor">
+          <rect width="10" height="10" fill="#f25022"/>
+          <rect x="11" width="10" height="10" fill="#7fba00"/>
+          <rect y="11" width="10" height="10" fill="#00a4ef"/>
+          <rect x="11" y="11" width="10" height="10" fill="#ffb900"/>
+        </svg>
+        Login ด้วย Microsoft 365
+      </button>
+    </div>
+
+    <!-- Fetch Button (แสดงเมื่อ login แล้ว) -->
+    <button class="action-button" id="fetchBtn" onclick="fetchMyTasks()" style="display: none;">
+      <span class="spinner"></span>
+      <span class="btn-text">📋 ดึงงาน Active ของฉัน</span>
+    </button>
+
+    <div class="result-container">
+      <h2>📊 ผลลัพธ์</h2>
+      <div class="result-content" id="resultContent">
+        <div class="placeholder">
+          <div class="icon">🔐</div>
+          <p>กรุณา Login ด้วย Microsoft 365 ก่อน</p>
+        </div>
+      </div>
+      <div class="timestamp" id="timestamp"></div>
+    </div>
+  </div>
+
+  <script>
+    // ตรวจสอบว่า login แล้วหรือยัง
+    async function checkLoginStatus() {
+      try {
+        const response = await fetch('http://localhost:3000/auth/user', { credentials: 'include' });
+        const data = await response.json();
+        
+        if (data.logged_in) {
+          showLoggedInState(data.name, data.email);
+        } else {
+          showLoggedOutState();
+        }
+      } catch (error) {
+        // ถ้าเรียก API ไม่ได้ ลองดู URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('logged_in') === 'true') {
+          const name = urlParams.get('name') || 'User';
+          showLoggedInState(name, '');
+        } else {
+          showLoggedOutState();
+        }
+      }
+    }
+
+    function showLoggedInState(name, email) {
+      document.getElementById('userName').textContent = name;
+      document.getElementById('userEmail').textContent = email || 'กดปุ่มด้านล่างเพื่อดึงงานของคุณ';
+      document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
+      document.getElementById('loginSection').style.display = 'none';
+      document.getElementById('fetchBtn').style.display = 'flex';
+      document.getElementById('logoutBtn').style.display = 'block';
+      document.getElementById('resultContent').innerHTML = `
+        <div class="placeholder">
+          <div class="icon">📋</div>
+          <p>กดปุ่ม "ดึงงาน Active ของฉัน" เพื่อดูงานที่ Assigned ให้คุณ</p>
+        </div>
+      `;
+      
+      // เก็บชื่อไว้ใช้
+      window.currentUserName = name;
+    }
+
+    function showLoggedOutState() {
+      document.getElementById('userName').textContent = 'กรุณา Login';
+      document.getElementById('userEmail').textContent = 'คลิกปุ่มด้านล่างเพื่อ Login ด้วย Microsoft 365';
+      document.getElementById('userAvatar').textContent = '?';
+      document.getElementById('loginSection').style.display = 'block';
+      document.getElementById('fetchBtn').style.display = 'none';
+      document.getElementById('logoutBtn').style.display = 'none';
+    }
+
+    function logout() {
+      window.location.href = 'http://localhost:3000/auth/logout';
+    }
+
+    async function fetchMyTasks() {
+      const btn = document.getElementById('fetchBtn');
+      const resultContent = document.getElementById('resultContent');
+      const timestamp = document.getElementById('timestamp');
+
+      // Show loading
+      btn.classList.add('loading');
+      btn.disabled = true;
+      resultContent.innerHTML = '<div class="placeholder"><div class="icon">⏳</div><p>กำลังดึงข้อมูลจาก Azure DevOps...</p></div>';
+
+      try {
+        // ใช้ /api/my_tasks ที่ใช้ session (ถ้า session ไม่ทำงาน fallback ไป demo)
+        let response = await fetch('http://localhost:3000/api/my_tasks', { credentials: 'include' });
+        let data = await response.json();
+
+        // ถ้า session ไม่ทำงาน (401) ใช้ demo แทน
+        if (response.status === 401 && window.currentUserName) {
+          response = await fetch('http://localhost:3000/api/my_tasks/demo', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_name: window.currentUserName })
+          });
+          data = await response.json();
+        }
+
+        if (data.error) {
+          resultContent.innerHTML = `<div class="placeholder">
+            <div class="icon">❌</div>
+            <p>${data.error}</p>
+          </div>`;
+        } else {
+          // Format markdown to HTML
+          let content = data.content
+            .replace(/^### (.*)$/gm, '<h3>$1</h3>')
+            .replace(/^## (.*)$/gm, '<h2>$1</h2>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/^---$/gm, '<hr style="border: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">')
+            .replace(/\n/g, '<br>')
+            .replace(/<\/h2><br>/g, '</h2>')
+            .replace(/<\/h3><br>/g, '</h3>')
+            .replace(/<hr[^>]*><br>/g, '<hr style="border: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">');
+          
+          resultContent.innerHTML = content;
+          timestamp.textContent = `อัปเดตล่าสุด: ${new Date(data.timestamp).toLocaleString('th-TH')}`;
+        }
+      } catch (error) {
+        resultContent.innerHTML = `<div class="placeholder">
+          <div class="icon">❌</div>
+          <p>เกิดข้อผิดพลาด: ${error.message}</p>
+          <p style="margin-top: 10px; font-size: 0.9rem; color: #ff6b6b;">กรุณาตรวจสอบว่า Rails server ทำงานอยู่</p>
+        </div>`;
+      } finally {
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    }
+
+    // เรียกตอนโหลดหน้า
+    checkLoginStatus();
+  </script>
+</body>
+</html>
+

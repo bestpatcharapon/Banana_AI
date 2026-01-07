@@ -1,0 +1,471 @@
+{
+  "evalId": "eval-1oz-2025-12-24T04:22:51",
+  "results": {
+    "version": 3,
+    "timestamp": "2025-12-24T04:22:51.842Z",
+    "prompts": [
+      {
+        "raw": "{{user_message}}",
+        "label": "{{user_message}}",
+        "id": "9aade6f7f6008ee0be3cc067aee1ce8842abaeb0e7a64dfc00d203dd9251b3e8",
+        "provider": "rails-api",
+        "metrics": {
+          "score": 2,
+          "testPassCount": 2,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 5,
+          "assertFailCount": 0,
+          "totalLatencyMs": 7058,
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 2,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "/[฀-๿]/.test(output)"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "!/[一-鿿]/.test(output)"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "output.length > 50"
+              }
+            }
+          ]
+        },
+        "id": "65bdc02b-0338-4354-80f9-b402f3d178c7",
+        "latencyMs": 4125,
+        "namedScores": {},
+        "prompt": {
+          "raw": "ดึงงานในโปรเจกต์ Banana AI Assistant",
+          "label": "{{user_message}}"
+        },
+        "promptId": "9aade6f7f6008ee0be3cc067aee1ce8842abaeb0e7a64dfc00d203dd9251b3e8",
+        "promptIdx": 0,
+        "provider": {
+          "id": "http://localhost:3000/chat/send",
+          "label": "rails-api"
+        },
+        "response": {
+          "raw": "{\"role\":\"assistant\",\"content\":\"### ภาพรวมของโปรเจกต์ Banana AI Assistant\\nโปรเจกต์นี้อยู่ในช่วง **Sprint 12-22** (2025-12-22 ถึง 2025-12-26) โดยมีงานที่เกี่ยวข้องใน Azure DevOps ดังนี้\\n* มีงานทั้งหมด 11 งาน โดยแบ่งเป็น **Task** 6 งาน และ **User Story** 5 งาน\\n* สภาพงานปัจจุบัน มีงาน **Active** 3 งาน, **Closed** 4 งาน, และ **New** 4 งาน\\n\\n### โหลดงานของทีม\\n* **Phadungkiart Namsai** ถืองาน **Task** 2 งาน (1 งาน **Active** และ 1 งาน **Closed**)\\n* **Jessada Boonta** ถืองาน **Task** 2 งาน (1 งาน **Active** และ 1 งาน **Closed**)\\n* **Patcharapon Yoriya** ถืองาน **Task** 1 งาน (**Active**)\\n* **Unassigned** มี **User Story** 5 งาน (**New**)\\n\\n### งานที่สำคัญ\\n* **#21154** [Task] Research mcp client Claude API (Active) - ถูกกำหนดให้ **Phadungkiart Namsai**\\n* **#21143** [Task] Research Claude API (Active) - ถูกกำหนดให้ **Jessada Boonta**\\n* **#21149** [Task] Design Test Case for prompt AI (Active) - ถูกกำหนดให้ **Patcharapon Yoriya**\\n\\n### คำแนะนำ\\n* ควรมีการกำหนดผู้รับผิดชอบสำหรับ **User Story** ที่ยังไม่ได้กำหนดผู้รับผิดชอบ\\n* ควรมีการติดตามความก้าวหน้าของงาน **Active** เพื่อให้แน่ใจว่างานจะเสร็จสิ้นตามแผน\\n* ควรมีการประเมินความยากและความสำคัญของงานเพื่อจัดลำดับความสำคัญในการทำงาน\"}",
+          "latencyMs": 4116,
+          "cached": false,
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "cache-control": "max-age=0, private, must-revalidate",
+                "content-length": "2103",
+                "content-type": "application/json; charset=utf-8",
+                "etag": "W/\"c96a13cae4a9cf944c183451c43b871a\"",
+                "referrer-policy": "strict-origin-when-cross-origin",
+                "server-timing": "start_processing.action_controller;dur=0.01, process_action.action_controller;dur=4106.12",
+                "vary": "Accept",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "SAMEORIGIN",
+                "x-permitted-cross-domain-policies": "none",
+                "x-request-id": "ad454a3c-33ae-44b5-92bd-3fac458358e8",
+                "x-runtime": "4.111140",
+                "x-xss-protection": "0"
+              }
+            }
+          },
+          "output": "### ภาพรวมของโปรเจกต์ Banana AI Assistant\nโปรเจกต์นี้อยู่ในช่วง **Sprint 12-22** (2025-12-22 ถึง 2025-12-26) โดยมีงานที่เกี่ยวข้องใน Azure DevOps ดังนี้\n* มีงานทั้งหมด 11 งาน โดยแบ่งเป็น **Task** 6 งาน และ **User Story** 5 งาน\n* สภาพงานปัจจุบัน มีงาน **Active** 3 งาน, **Closed** 4 งาน, และ **New** 4 งาน\n\n### โหลดงานของทีม\n* **Phadungkiart Namsai** ถืองาน **Task** 2 งาน (1 งาน **Active** และ 1 งาน **Closed**)\n* **Jessada Boonta** ถืองาน **Task** 2 งาน (1 งาน **Active** และ 1 งาน **Closed**)\n* **Patcharapon Yoriya** ถืองาน **Task** 1 งาน (**Active**)\n* **Unassigned** มี **User Story** 5 งาน (**New**)\n\n### งานที่สำคัญ\n* **#21154** [Task] Research mcp client Claude API (Active) - ถูกกำหนดให้ **Phadungkiart Namsai**\n* **#21143** [Task] Research Claude API (Active) - ถูกกำหนดให้ **Jessada Boonta**\n* **#21149** [Task] Design Test Case for prompt AI (Active) - ถูกกำหนดให้ **Patcharapon Yoriya**\n\n### คำแนะนำ\n* ควรมีการกำหนดผู้รับผิดชอบสำหรับ **User Story** ที่ยังไม่ได้กำหนดผู้รับผิดชอบ\n* ควรมีการติดตามความก้าวหน้าของงาน **Active** เพื่อให้แน่ใจว่างานจะเสร็จสิ้นตามแผน\n* ควรมีการประเมินความยากและความสำคัญของงานเพื่อจัดลำดับความสำคัญในการทำงาน",
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Azure: List Work Items",
+          "vars": {
+            "user_message": "ดึงงานในโปรเจกต์ Banana AI Assistant"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "/[฀-๿]/.test(output)"
+            },
+            {
+              "type": "javascript",
+              "value": "!/[一-鿿]/.test(output)"
+            },
+            {
+              "type": "javascript",
+              "value": "output.length > 50"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "user_message": "ดึงงานในโปรเจกต์ Banana AI Assistant"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "cache-control": "max-age=0, private, must-revalidate",
+              "content-length": "2103",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"c96a13cae4a9cf944c183451c43b871a\"",
+              "referrer-policy": "strict-origin-when-cross-origin",
+              "server-timing": "start_processing.action_controller;dur=0.01, process_action.action_controller;dur=4106.12",
+              "vary": "Accept",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "x-permitted-cross-domain-policies": "none",
+              "x-request-id": "ad454a3c-33ae-44b5-92bd-3fac458358e8",
+              "x-runtime": "4.111140",
+              "x-xss-protection": "0"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "/[฀-๿]/.test(output)"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "sprint"
+              }
+            }
+          ]
+        },
+        "id": "5e327704-af41-4632-97c0-4055462592fe",
+        "latencyMs": 2933,
+        "namedScores": {},
+        "prompt": {
+          "raw": "ตอนนี้อยู่ Sprint ไหน",
+          "label": "{{user_message}}"
+        },
+        "promptId": "9aade6f7f6008ee0be3cc067aee1ce8842abaeb0e7a64dfc00d203dd9251b3e8",
+        "promptIdx": 0,
+        "provider": {
+          "id": "http://localhost:3000/chat/send",
+          "label": "rails-api"
+        },
+        "response": {
+          "raw": "{\"role\":\"assistant\",\"content\":\"### ภาพรวม (Overview)\\nเรากำลังอยู่ใน **Sprint 12-22** โดยมีวันที่เริ่มต้นและวันที่สิ้นสุดดังนี้\\n* **วันเริ่มต้น:** 2025-12-22\\n* **วันสิ้นสุด:** 2025-12-26\\n* **เส้นทาง (Path):** Banana AI Assistant\\\\12-22\\n\\n### โหลดงานของทีม (Team Workload)\\nไม่มีข้อมูลเกี่ยวกับโหลดงานของแต่ละคนในทีม แต่เราสามารถวิเคราะห์ได้ว่า Sprint นี้มีความสำคัญเนื่องจากมีเวลาจำกัด (4 วัน) และมี **Path** ที่ชัดเจน ซึ่งบ่งบอกถึงเป้าหมายหรืองานหลักที่ต้องทำเสร็จสิ้นภายใน Sprint นี้\\n\\n### งานสำคัญ (Critical Tasks)\\nไม่มีข้อมูลเฉพาะเกี่ยวกับ **Task** หรือ **Bug** ที่ต้องจัดการภายใน Sprint นี้ แต่เราควรให้ความสำคัญกับการวางแผนและจัดสรรเวลาที่เหมาะสมเพื่อให้ทำงานตาม **Path** ที่กำหนดไว้ และเตรียมพร้อมสำหรับการ **Deploy** ที่อาจเกิดขึ้นหลังจากสิ้นสุด Sprint\\n\\n### สรุป (Conclusion)\\nเราควรให้ความสำคัญกับการจัดการเวลาและทรัพยากรอย่างเหมาะสมภายใน Sprint 12-22 เพื่อให้ทำงานตามเป้าหมายและเตรียมพร้อมสำหรับการพัฒนาในระยะยาวโดยใช้ **Azure DevOps** ในการสนับสนุนกระบวนการ **Agile** ของทีม.\"}",
+          "latencyMs": 2928,
+          "cached": false,
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "cache-control": "max-age=0, private, must-revalidate",
+                "content-length": "2262",
+                "content-type": "application/json; charset=utf-8",
+                "etag": "W/\"a1ab4fd695b35898319ec3faf81f0282\"",
+                "referrer-policy": "strict-origin-when-cross-origin",
+                "server-timing": "start_processing.action_controller;dur=0.01, process_action.action_controller;dur=2921.50",
+                "vary": "Accept",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "SAMEORIGIN",
+                "x-permitted-cross-domain-policies": "none",
+                "x-request-id": "4331f230-324b-4fbb-9603-1ce65fd5f9a8",
+                "x-runtime": "2.922973",
+                "x-xss-protection": "0"
+              }
+            }
+          },
+          "output": "### ภาพรวม (Overview)\nเรากำลังอยู่ใน **Sprint 12-22** โดยมีวันที่เริ่มต้นและวันที่สิ้นสุดดังนี้\n* **วันเริ่มต้น:** 2025-12-22\n* **วันสิ้นสุด:** 2025-12-26\n* **เส้นทาง (Path):** Banana AI Assistant\\12-22\n\n### โหลดงานของทีม (Team Workload)\nไม่มีข้อมูลเกี่ยวกับโหลดงานของแต่ละคนในทีม แต่เราสามารถวิเคราะห์ได้ว่า Sprint นี้มีความสำคัญเนื่องจากมีเวลาจำกัด (4 วัน) และมี **Path** ที่ชัดเจน ซึ่งบ่งบอกถึงเป้าหมายหรืองานหลักที่ต้องทำเสร็จสิ้นภายใน Sprint นี้\n\n### งานสำคัญ (Critical Tasks)\nไม่มีข้อมูลเฉพาะเกี่ยวกับ **Task** หรือ **Bug** ที่ต้องจัดการภายใน Sprint นี้ แต่เราควรให้ความสำคัญกับการวางแผนและจัดสรรเวลาที่เหมาะสมเพื่อให้ทำงานตาม **Path** ที่กำหนดไว้ และเตรียมพร้อมสำหรับการ **Deploy** ที่อาจเกิดขึ้นหลังจากสิ้นสุด Sprint\n\n### สรุป (Conclusion)\nเราควรให้ความสำคัญกับการจัดการเวลาและทรัพยากรอย่างเหมาะสมภายใน Sprint 12-22 เพื่อให้ทำงานตามเป้าหมายและเตรียมพร้อมสำหรับการพัฒนาในระยะยาวโดยใช้ **Azure DevOps** ในการสนับสนุนกระบวนการ **Agile** ของทีม.",
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Azure: Get Current Sprint",
+          "vars": {
+            "user_message": "ตอนนี้อยู่ Sprint ไหน"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "/[฀-๿]/.test(output)"
+            },
+            {
+              "type": "icontains",
+              "value": "sprint"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "user_message": "ตอนนี้อยู่ Sprint ไหน"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "cache-control": "max-age=0, private, must-revalidate",
+              "content-length": "2262",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"a1ab4fd695b35898319ec3faf81f0282\"",
+              "referrer-policy": "strict-origin-when-cross-origin",
+              "server-timing": "start_processing.action_controller;dur=0.01, process_action.action_controller;dur=2921.50",
+              "vary": "Accept",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "x-permitted-cross-domain-policies": "none",
+              "x-request-id": "4331f230-324b-4fbb-9603-1ce65fd5f9a8",
+              "x-runtime": "2.922973",
+              "x-xss-protection": "0"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 2,
+      "failures": 0,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 0,
+        "completion": 0,
+        "cached": 0,
+        "total": 0,
+        "numRequests": 2,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0
+          }
+        }
+      },
+      "durationMs": 13089
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "Banana AI - Azure DevOps Tests (Rails API)",
+    "prompts": [
+      "{{user_message}}"
+    ],
+    "providers": [
+      {
+        "id": "http",
+        "label": "rails-api",
+        "config": {
+          "url": "http://localhost:3000/chat/send",
+          "method": "POST",
+          "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          "body": "message={{prompt}}",
+          "responseParser": "json.content"
+        }
+      }
+    ],
+    "tests": [
+      {
+        "description": "Azure: List Work Items",
+        "vars": {
+          "user_message": "ดึงงานในโปรเจกต์ Banana AI Assistant"
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "/[฀-๿]/.test(output)"
+          },
+          {
+            "type": "javascript",
+            "value": "!/[一-鿿]/.test(output)"
+          },
+          {
+            "type": "javascript",
+            "value": "output.length > 50"
+          }
+        ]
+      },
+      {
+        "description": "Azure: Get Current Sprint",
+        "vars": {
+          "user_message": "ตอนนี้อยู่ Sprint ไหน"
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "/[฀-๿]/.test(output)"
+          },
+          {
+            "type": "icontains",
+            "value": "sprint"
+          }
+        ]
+      }
+    ],
+    "scenarios": [],
+    "env": {},
+    "outputPath": [
+      "./test_results/azure_results.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {
+      "maxConcurrency": 1,
+      "delay": 3000
+    }
+  },
+  "shareableUrl": "https://www.promptfoo.app/eval/eval-1oz-2025-12-24T04:22:51",
+  "metadata": {
+    "promptfooVersion": "0.120.8",
+    "nodeVersion": "v20.19.6",
+    "platform": "linux",
+    "arch": "x64",
+    "exportedAt": "2025-12-24T04:23:06.230Z",
+    "evaluationCreatedAt": "2025-12-24T04:22:51.842Z",
+    "author": "patcharaponyo65@gmail.com"
+  }
+}

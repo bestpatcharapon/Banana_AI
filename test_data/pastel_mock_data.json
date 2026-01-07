@@ -1,0 +1,91 @@
+{
+  "weekly_timesheet": {
+    "employee_id": "EMP001",
+    "employee_name": "Patcharapon Srisawat",
+    "department": "Software Development",
+    "week_start": "2024-12-16",
+    "week_end": "2024-12-22",
+    "total_hours": 42.5,
+    "daily_entries": [
+      {
+        "date": "2024-12-16",
+        "day": "Monday",
+        "clock_in": "09:00",
+        "clock_out": "18:00",
+        "break_hours": 1,
+        "work_hours": 8,
+        "projects": [
+          {"name": "Banana AI Assistant", "hours": 6, "tasks": ["Develop Chat UI", "Design System Prompt"]},
+          {"name": "Internal Meeting", "hours": 2, "tasks": ["Sprint Planning"]}
+        ]
+      },
+      {
+        "date": "2024-12-17",
+        "day": "Tuesday",
+        "clock_in": "08:30",
+        "clock_out": "17:30",
+        "break_hours": 1.5,
+        "work_hours": 7.5,
+        "projects": [
+          {"name": "Banana AI Assistant", "hours": 7.5, "tasks": ["Integrate Groq API", "Tool Calling Implementation"]}
+        ]
+      },
+      {
+        "date": "2024-12-18",
+        "day": "Wednesday",
+        "clock_in": "09:00",
+        "clock_out": "16:00",
+        "break_hours": 1,
+        "work_hours": 6,
+        "projects": [
+          {"name": "Client Portal", "hours": 6, "tasks": ["Bug fixing #1234", "UI Improvements"]}
+        ]
+      },
+      {
+        "date": "2024-12-19",
+        "day": "Thursday",
+        "clock_in": "08:00",
+        "clock_out": "18:00",
+        "break_hours": 1,
+        "work_hours": 9,
+        "projects": [
+          {"name": "Banana AI Assistant", "hours": 9, "tasks": ["Azure DevOps Integration", "MCP Server Setup"]}
+        ]
+      },
+      {
+        "date": "2024-12-20",
+        "day": "Friday",
+        "clock_in": "09:00",
+        "clock_out": "18:00",
+        "break_hours": 1,
+        "work_hours": 8,
+        "projects": [
+          {"name": "Banana AI Assistant", "hours": 5, "tasks": ["Testing", "Documentation"]},
+          {"name": "Code Review", "hours": 3, "tasks": ["Review PR #567", "Review PR #568"]}
+        ]
+      },
+      {
+        "date": "2024-12-22",
+        "day": "Sunday",
+        "clock_in": "10:00",
+        "clock_out": "14:00",
+        "break_hours": 0,
+        "work_hours": 4,
+        "projects": [
+          {"name": "Internal", "hours": 4, "tasks": ["Sprint Retrospective", "Next Week Planning"]}
+        ]
+      }
+    ],
+    "summary": {
+      "by_project": [
+        {"project": "Banana AI Assistant", "hours": 27.5},
+        {"project": "Client Portal", "hours": 6},
+        {"project": "Internal Meeting", "hours": 2},
+        {"project": "Code Review", "hours": 3},
+        {"project": "Internal", "hours": 4}
+      ],
+      "overtime_hours": 2.5,
+      "leave_days": 0
+    }
+  }
+}

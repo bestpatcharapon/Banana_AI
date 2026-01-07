@@ -35,6 +35,11 @@ gem "image_processing", "~> 1.2"
 # Use MCP for AI
 gem "mcp", "~> 0.4.0"
 
+# Microsoft OAuth
+gem "omniauth", "~> 2.1"
+gem "omniauth-azure-activedirectory-v2"
+gem "omniauth-rails_csrf_protection"
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 # gem "rack-cors"
 

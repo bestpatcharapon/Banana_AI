@@ -8,11 +8,10 @@ services:
   - type: web
     name: banana-ai-assistant
     env: docker
-    plan: free
-    region: singapore # ใกล้ไทยสุด
-    previewEnvironmentSection:
-      enabled: false
-    envVars:
+    repo: https://github.com/bestpatcharapon/Banana_Ai_Assistant
+    branch: API_Groq_Connect_mcp_server # ระบุ branch ให้ชัดเจน
+    
+    # Environment Variables
       - key: RAILS_MASTER_KEY
         sync: false # ต้องใส่ manual ใน dashboad
       - key: DATABASE_URL

@@ -9,17 +9,15 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fafafa;
+      --bg: #f5f5f5;
       --card: #ffffff;
       --text-primary: #1a1a1a;
-      --text-secondary: #6b6b6b;
-      --text-muted: #a0a0a0;
-      --border: #e5e5e5;
-      --accent: #f5f0e8;
-      --accent-hover: #ebe4d8;
-      --accent-text: #5c5346;
-      --shadow: rgba(0, 0, 0, 0.04);
-      --shadow-hover: rgba(0, 0, 0, 0.08);
+      --text-secondary: #555;
+      --text-muted: #888;
+      --border: #e0e0e0;
+      --accent: #fef3c7;
+      --accent-dark: #fcd34d;
+      --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     }
 
     * {
@@ -33,73 +31,76 @@
       background: var(--bg);
       min-height: 100vh;
       color: var(--text-primary);
-      line-height: 1.6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
 
-    .container {
-      max-width: 540px;
-      margin: 0 auto;
-      padding: 80px 24px;
+    .main-card {
+      background: var(--card);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
     }
 
+    /* Header */
     .header {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      padding: 32px 24px;
       text-align: center;
-      margin-bottom: 56px;
-    }
-
-    .logo {
-      font-size: 2.5rem;
-      margin-bottom: 16px;
+      border-bottom: 1px solid var(--accent-dark);
     }
 
     .header h1 {
       font-size: 1.5rem;
-      font-weight: 500;
-      margin-bottom: 8px;
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
+      font-weight: 600;
+      color: #78350f;
+      margin-bottom: 4px;
     }
 
     .header p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      font-weight: 300;
+      color: #92400e;
+      font-size: 0.85rem;
+      font-weight: 400;
     }
 
-    .user-card {
-      background: var(--card);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 20px;
+    /* User Section */
+    .user-section {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
-      gap: 16px;
-      border: 1px solid var(--border);
-      box-shadow: 0 1px 3px var(--shadow);
+      gap: 14px;
     }
 
     .user-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
       background: var(--accent);
+      border: 2px solid var(--accent-dark);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1rem;
-      font-weight: 500;
-      color: var(--accent-text);
+      font-weight: 600;
+      color: #78350f;
+      flex-shrink: 0;
     }
 
     .user-info {
       flex: 1;
+      min-width: 0;
     }
 
     .user-info h3 {
       font-size: 0.95rem;
       font-weight: 500;
-      margin-bottom: 2px;
       color: var(--text-primary);
+      margin-bottom: 2px;
     }
 
     .user-info p {
@@ -112,10 +113,10 @@
       background: transparent;
       color: var(--text-muted);
       border: 1px solid var(--border);
-      padding: 8px 14px;
-      border-radius: 8px;
+      padding: 6px 12px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 400;
       transition: all 0.2s ease;
       font-family: inherit;
@@ -124,38 +125,68 @@
     .logout-btn:hover {
       background: #fef2f2;
       color: #dc2626;
-      border-color: #fecaca;
+      border-color: #fca5a5;
+    }
+
+    /* Actions Section */
+    .actions-section {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .login-btn {
+      background: var(--card);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      padding: 12px 20px;
+      font-size: 0.9rem;
+      font-weight: 400;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .login-btn:hover {
+      background: #f9fafb;
+      border-color: #ccc;
+    }
+
+    .login-btn svg {
+      width: 18px;
+      height: 18px;
     }
 
     .action-button {
       background: var(--text-primary);
       color: white;
       border: none;
-      padding: 16px 24px;
-      font-size: 0.95rem;
-      font-weight: 400;
-      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 10px;
       cursor: pointer;
       width: 100%;
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 8px;
       font-family: inherit;
     }
 
     .action-button:hover {
       background: #333;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .action-button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
-      transform: none;
     }
 
     .action-button .spinner {
@@ -176,42 +207,30 @@
       to { transform: rotate(360deg); }
     }
 
-    .result-container {
-      background: var(--card);
-      border-radius: 16px;
-      padding: 24px;
-      border: 1px solid var(--border);
-      box-shadow: 0 1px 3px var(--shadow);
-      min-height: 180px;
+    /* Result Section */
+    .result-section {
+      padding: 20px 24px;
+      min-height: 200px;
     }
 
-    .result-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .result-header h2 {
-      font-size: 0.85rem;
+    .result-label {
+      font-size: 0.75rem;
       font-weight: 500;
-      color: var(--text-secondary);
+      color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      margin-bottom: 12px;
     }
 
     .result-content {
-      line-height: 1.8;
-      white-space: pre-wrap;
+      line-height: 1.7;
       color: var(--text-primary);
       font-size: 0.9rem;
     }
 
     .result-content h2, .result-content h3 {
       color: var(--text-primary);
-      margin: 20px 0 8px;
+      margin: 16px 0 8px;
       font-weight: 500;
       font-size: 1rem;
     }
@@ -224,14 +243,13 @@
     .placeholder {
       text-align: center;
       color: var(--text-muted);
-      padding: 32px 20px;
+      padding: 40px 20px;
     }
 
     .placeholder .icon {
       font-size: 2.5rem;
       margin-bottom: 12px;
-      opacity: 0.6;
-      filter: grayscale(0.3);
+      opacity: 0.5;
     }
 
     .placeholder p {
@@ -239,109 +257,61 @@
       font-size: 0.9rem;
     }
 
-    .login-section {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .login-btn {
-      background: var(--card);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-      padding: 14px 28px;
-      font-size: 0.9rem;
-      font-weight: 400;
-      border-radius: 12px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      transition: all 0.2s ease;
-      font-family: inherit;
-      box-shadow: 0 1px 3px var(--shadow);
-    }
-
-    .login-btn:hover {
-      background: var(--bg);
-      border-color: #ccc;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px var(--shadow-hover);
-    }
-
-    .login-btn svg {
-      width: 18px;
-      height: 18px;
-    }
-
     .timestamp {
       text-align: right;
       color: var(--text-muted);
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       margin-top: 16px;
       font-weight: 300;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 24px 0;
-    }
-
-    /* Subtle top accent line */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #e8dcc8, #d4c4a8, #e8dcc8);
-      z-index: 100;
     }
 
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="main-card">
+    <!-- Header -->
     <div class="header">
       <h1>Banana AI</h1>
       <p>ดึงงานของคุณจาก Azure DevOps</p>
     </div>
 
-    <div class="user-card">
+    <!-- User Section -->
+    <div class="user-section">
       <div class="user-avatar" id="userAvatar">?</div>
       <div class="user-info">
-        <h3 id="userName">ยังไม่ได้ Login</h3>
-        <p id="userEmail">เข้าสู่ระบบเพื่อดูงานของคุณ</p>
+        <h3 id="userName">ยังไม่ได้เข้าสู่ระบบ</h3>
+        <p id="userEmail">กรุณาเข้าสู่ระบบด้วย Microsoft</p>
       </div>
       <button class="logout-btn" id="logoutBtn" onclick="logout()" style="display: none;">
         ออก
       </button>
     </div>
 
-    <!-- Login Button -->
-    <div id="loginSection" class="login-section">
-      <button class="login-btn" onclick="window.location.href='/auth/microsoft'">
-        <svg viewBox="0 0 21 21">
-          <rect width="10" height="10" fill="#f25022"/>
-          <rect x="11" width="10" height="10" fill="#7fba00"/>
-          <rect y="11" width="10" height="10" fill="#00a4ef"/>
-          <rect x="11" y="11" width="10" height="10" fill="#ffb900"/>
-        </svg>
-        เข้าสู่ระบบด้วย Microsoft
+    <!-- Actions Section -->
+    <div class="actions-section">
+      <!-- Login Button -->
+      <div id="loginSection">
+        <button class="login-btn" onclick="window.location.href='/auth/microsoft'">
+          <svg viewBox="0 0 21 21">
+            <rect width="10" height="10" fill="#f25022"/>
+            <rect x="11" width="10" height="10" fill="#7fba00"/>
+            <rect y="11" width="10" height="10" fill="#00a4ef"/>
+            <rect x="11" y="11" width="10" height="10" fill="#ffb900"/>
+          </svg>
+          เข้าสู่ระบบด้วย Microsoft
+        </button>
+      </div>
+
+      <!-- Fetch Button -->
+      <button class="action-button" id="fetchBtn" onclick="fetchMyTasks()" style="display: none;">
+        <span class="spinner"></span>
+        <span class="btn-text">📋 ดึงงานของฉัน</span>
       </button>
     </div>
 
-    <!-- Fetch Button -->
-    <button class="action-button" id="fetchBtn" onclick="fetchMyTasks()" style="display: none;">
-      <span class="spinner"></span>
-      <span class="btn-text">ดึงงานของฉัน</span>
-    </button>
-
-    <div class="result-container">
-      <div class="result-header">
-        <h2>ผลลัพธ์</h2>
-      </div>
+    <!-- Result Section -->
+    <div class="result-section">
+      <div class="result-label">ผลลัพธ์</div>
       <div class="result-content" id="resultContent">
         <div class="placeholder">
           <div class="icon">🔐</div>
@@ -350,11 +320,9 @@
       </div>
       <div class="timestamp" id="timestamp"></div>
     </div>
-
   </div>
 
   <script>
-    // ตรวจสอบว่า login แล้วหรือยัง
     async function checkLoginStatus() {
       try {
         const response = await fetch('/auth/user', { credentials: 'include' });
@@ -366,7 +334,6 @@
           showLoggedOutState();
         }
       } catch (error) {
-        // ถ้าเรียก API ไม่ได้ ลองดู URL params
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('logged_in') === 'true') {
           const name = urlParams.get('name') || 'User';
@@ -379,20 +346,23 @@
 
     function showLoggedInState(name, email) {
       document.getElementById('userName').textContent = name;
-      document.getElementById('userEmail').textContent = email || 'กดปุ่มด้านล่างเพื่อดึงงานของคุณ';
+      document.getElementById('userEmail').textContent = email || 'พร้อมดึงงานของคุณแล้ว';
       document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
       document.getElementById('loginSection').style.display = 'none';
       document.getElementById('fetchBtn').style.display = 'flex';
       document.getElementById('logoutBtn').style.display = 'block';
-      document.getElementById('resultContent').innerHTML = ``;
-      
-      // เก็บชื่อไว้ใช้
+      document.getElementById('resultContent').innerHTML = `
+        <div class="placeholder">
+          <div class="icon">📂</div>
+          <p>กดปุ่มด้านบนเพื่อดึงงาน</p>
+        </div>
+      `;
       window.currentUserName = name;
     }
 
     function showLoggedOutState() {
-      document.getElementById('userName').textContent = 'ยังไม่ได้ Login';
-      document.getElementById('userEmail').textContent = 'เข้าสู่ระบบเพื่อดูงานของคุณ';
+      document.getElementById('userName').textContent = 'ยังไม่ได้เข้าสู่ระบบ';
+      document.getElementById('userEmail').textContent = 'กรุณาเข้าสู่ระบบด้วย Microsoft';
       document.getElementById('userAvatar').textContent = '?';
       document.getElementById('loginSection').style.display = 'block';
       document.getElementById('fetchBtn').style.display = 'none';
@@ -408,17 +378,14 @@
       const resultContent = document.getElementById('resultContent');
       const timestamp = document.getElementById('timestamp');
 
-      // Show loading
       btn.classList.add('loading');
       btn.disabled = true;
       resultContent.innerHTML = '<div class="placeholder"><div class="icon">⏳</div><p>กำลังโหลด...</p></div>';
 
       try {
-        // ใช้ /api/my_tasks ที่ใช้ session (ถ้า session ไม่ทำงาน fallback ไป demo)
         let response = await fetch('/api/my_tasks', { credentials: 'include' });
         let data = await response.json();
 
-        // ถ้า session ไม่ทำงาน (401) ใช้ demo แทน
         if (response.status === 401 && window.currentUserName) {
           response = await fetch('/api/my_tasks/demo', {
             method: 'POST',
@@ -434,25 +401,23 @@
             <p>${data.error}</p>
           </div>`;
         } else {
-          // Format markdown to HTML
           let content = data.content
             .replace(/^### (.*)$/gm, '<h3>$1</h3>')
             .replace(/^## (.*)$/gm, '<h2>$1</h2>')
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/^---$/gm, '<hr style="border: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">')
+            .replace(/^---$/gm, '<hr style="border: none; border-top: 1px solid #eee; margin: 16px 0;">')
             .replace(/\n/g, '<br>')
             .replace(/<\/h2><br>/g, '</h2>')
             .replace(/<\/h3><br>/g, '</h3>')
-            .replace(/<hr[^>]*><br>/g, '<hr style="border: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">');
+            .replace(/<hr[^>]*><br>/g, '<hr style="border: none; border-top: 1px solid #eee; margin: 16px 0;">');
           
           resultContent.innerHTML = content;
-          timestamp.textContent = `อัปเดตล่าสุด: ${new Date(data.timestamp).toLocaleString('th-TH')}`;
+          timestamp.textContent = `อัปเดต: ${new Date(data.timestamp).toLocaleString('th-TH')}`;
         }
       } catch (error) {
         resultContent.innerHTML = `<div class="placeholder">
           <div class="icon">❌</div>
           <p>เกิดข้อผิดพลาด: ${error.message}</p>
-          <p style="margin-top: 10px; font-size: 0.9rem; color: #ff6b6b;">กรุณาตรวจสอบว่า Rails server ทำงานอยู่</p>
         </div>`;
       } finally {
         btn.classList.remove('loading');
@@ -460,7 +425,6 @@
       }
     }
 
-    // เรียกตอนโหลดหน้า
     checkLoginStatus();
   </script>
 </body>

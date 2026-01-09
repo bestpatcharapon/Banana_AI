@@ -3,10 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🍌 Banana AI - งานของฉัน</title>
+  <title>Banana AI</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #fafafa;
+      --card: #ffffff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6b6b;
+      --text-muted: #a0a0a0;
+      --border: #e5e5e5;
+      --accent: #f5f0e8;
+      --accent-hover: #ebe4d8;
+      --accent-text: #5c5346;
+      --shadow: rgba(0, 0, 0, 0.04);
+      --shadow-hover: rgba(0, 0, 0, 0.08);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -14,60 +29,66 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      font-family: 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
       min-height: 100vh;
-      color: #fff;
+      color: var(--text-primary);
+      line-height: 1.6;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 540px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 80px 24px;
     }
 
     .header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 56px;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
     }
 
     .header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #f7d94c, #f5a623);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
     }
 
     .header p {
-      color: #8892b0;
-      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 300;
     }
 
     .user-card {
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--card);
       border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 30px;
+      padding: 20px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
-      gap: 20px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      gap: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px var(--shadow);
     }
 
     .user-avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #f7d94c, #f5a623);
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #1a1a2e;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--accent-text);
     }
 
     .user-info {
@@ -75,66 +96,75 @@
     }
 
     .user-info h3 {
-      font-size: 1.3rem;
-      margin-bottom: 5px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 2px;
+      color: var(--text-primary);
     }
 
     .user-info p {
-      color: #8892b0;
-      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 300;
     }
 
     .logout-btn {
-      background: rgba(255, 107, 107, 0.2);
-      color: #ff6b6b;
-      border: 1px solid rgba(255, 107, 107, 0.3);
-      padding: 10px 20px;
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.3s ease;
+      font-size: 0.8rem;
+      font-weight: 400;
+      transition: all 0.2s ease;
+      font-family: inherit;
     }
 
     .logout-btn:hover {
-      background: rgba(255, 107, 107, 0.3);
+      background: #fef2f2;
+      color: #dc2626;
+      border-color: #fecaca;
     }
 
     .action-button {
-      background: linear-gradient(135deg, #f7d94c 0%, #f5a623 100%);
-      color: #1a1a2e;
+      background: var(--text-primary);
+      color: white;
       border: none;
-      padding: 16px 32px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      padding: 16px 24px;
+      font-size: 0.95rem;
+      font-weight: 400;
       border-radius: 12px;
       cursor: pointer;
       width: 100%;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+      font-family: inherit;
     }
 
     .action-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(247, 217, 76, 0.3);
+      background: #333;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .action-button:disabled {
-      opacity: 0.7;
+      opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
 
     .action-button .spinner {
-      width: 20px;
-      height: 20px;
-      border: 2px solid #1a1a2e;
-      border-top-color: transparent;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
       border-radius: 50%;
-      animation: spin 1s linear infinite;
+      animation: spin 0.8s linear infinite;
       display: none;
     }
 
@@ -147,74 +177,126 @@
     }
 
     .result-container {
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--card);
       border-radius: 16px;
       padding: 24px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      min-height: 300px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px var(--shadow);
+      min-height: 180px;
     }
 
-    .result-container h2 {
-      margin-bottom: 20px;
-      font-size: 1.3rem;
-      color: #f7d94c;
+    .result-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .result-header h2 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .result-content {
       line-height: 1.8;
       white-space: pre-wrap;
+      color: var(--text-primary);
+      font-size: 0.9rem;
     }
 
     .result-content h2, .result-content h3 {
-      color: #f7d94c;
-      margin: 20px 0 10px;
+      color: var(--text-primary);
+      margin: 20px 0 8px;
+      font-weight: 500;
+      font-size: 1rem;
     }
 
     .result-content strong {
-      color: #64ffda;
+      color: var(--text-primary);
+      font-weight: 600;
     }
 
     .placeholder {
       text-align: center;
-      color: #8892b0;
-      padding: 60px 20px;
+      color: var(--text-muted);
+      padding: 32px 20px;
     }
 
     .placeholder .icon {
-      font-size: 4rem;
-      margin-bottom: 20px;
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      opacity: 0.6;
+      filter: grayscale(0.3);
+    }
+
+    .placeholder p {
+      font-weight: 300;
+      font-size: 0.9rem;
     }
 
     .login-section {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     .login-btn {
-      background: #0078d4;
-      color: white;
-      border: none;
+      background: var(--card);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
       padding: 14px 28px;
-      font-size: 1rem;
-      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 400;
+      border-radius: 12px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      transition: all 0.3s ease;
+      gap: 12px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      box-shadow: 0 1px 3px var(--shadow);
     }
 
     .login-btn:hover {
-      background: #106ebe;
-      transform: translateY(-2px);
+      background: var(--bg);
+      border-color: #ccc;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px var(--shadow-hover);
+    }
+
+    .login-btn svg {
+      width: 18px;
+      height: 18px;
     }
 
     .timestamp {
       text-align: right;
-      color: #8892b0;
-      font-size: 0.8rem;
-      margin-top: 20px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin-top: 16px;
+      font-weight: 300;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+
+    /* Subtle top accent line */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #e8dcc8, #d4c4a8, #e8dcc8);
+      z-index: 100;
     }
 
   </style>
@@ -222,46 +304,48 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>🍌 Banana AI Assistant</h1>
-      <p>ดึงงาน Active ของคุณจาก Azure DevOps</p>
+      <h1>Banana AI</h1>
+      <p>ดึงงานของคุณจาก Azure DevOps</p>
     </div>
 
     <div class="user-card">
       <div class="user-avatar" id="userAvatar">?</div>
       <div class="user-info">
-        <h3 id="userName">กรุณา Login</h3>
-        <p id="userEmail">คลิกปุ่มด้านล่างเพื่อ Login ด้วย Microsoft 365</p>
+        <h3 id="userName">ยังไม่ได้ Login</h3>
+        <p id="userEmail">เข้าสู่ระบบเพื่อดูงานของคุณ</p>
       </div>
       <button class="logout-btn" id="logoutBtn" onclick="logout()" style="display: none;">
-        ออกจากระบบ
+        ออก
       </button>
     </div>
 
-    <!-- Login Button (แสดงเมื่อยังไม่ได้ login) -->
+    <!-- Login Button -->
     <div id="loginSection" class="login-section">
       <button class="login-btn" onclick="window.location.href='/auth/microsoft'">
-        <svg width="20" height="20" viewBox="0 0 21 21" fill="currentColor">
+        <svg viewBox="0 0 21 21">
           <rect width="10" height="10" fill="#f25022"/>
           <rect x="11" width="10" height="10" fill="#7fba00"/>
           <rect y="11" width="10" height="10" fill="#00a4ef"/>
           <rect x="11" y="11" width="10" height="10" fill="#ffb900"/>
         </svg>
-        Login ด้วย Microsoft 365
+        เข้าสู่ระบบด้วย Microsoft
       </button>
     </div>
 
-    <!-- Fetch Button (แสดงเมื่อ login แล้ว) -->
+    <!-- Fetch Button -->
     <button class="action-button" id="fetchBtn" onclick="fetchMyTasks()" style="display: none;">
       <span class="spinner"></span>
-      <span class="btn-text">📋 ดึงงาน Active ของฉัน</span>
+      <span class="btn-text">ดึงงานของฉัน</span>
     </button>
 
     <div class="result-container">
-      <h2>📊 ผลลัพธ์</h2>
+      <div class="result-header">
+        <h2>ผลลัพธ์</h2>
+      </div>
       <div class="result-content" id="resultContent">
         <div class="placeholder">
           <div class="icon">🔐</div>
-          <p>กรุณา Login ด้วย Microsoft 365 ก่อน</p>
+          <p>กรุณาเข้าสู่ระบบก่อน</p>
         </div>
       </div>
       <div class="timestamp" id="timestamp"></div>
@@ -300,20 +384,15 @@
       document.getElementById('loginSection').style.display = 'none';
       document.getElementById('fetchBtn').style.display = 'flex';
       document.getElementById('logoutBtn').style.display = 'block';
-      document.getElementById('resultContent').innerHTML = `
-        <div class="placeholder">
-          <div class="icon">📋</div>
-          <p>กดปุ่ม "ดึงงาน Active ของฉัน" เพื่อดูงานที่ Assigned ให้คุณ</p>
-        </div>
-      `;
+      document.getElementById('resultContent').innerHTML = ``;
       
       // เก็บชื่อไว้ใช้
       window.currentUserName = name;
     }
 
     function showLoggedOutState() {
-      document.getElementById('userName').textContent = 'กรุณา Login';
-      document.getElementById('userEmail').textContent = 'คลิกปุ่มด้านล่างเพื่อ Login ด้วย Microsoft 365';
+      document.getElementById('userName').textContent = 'ยังไม่ได้ Login';
+      document.getElementById('userEmail').textContent = 'เข้าสู่ระบบเพื่อดูงานของคุณ';
       document.getElementById('userAvatar').textContent = '?';
       document.getElementById('loginSection').style.display = 'block';
       document.getElementById('fetchBtn').style.display = 'none';
@@ -332,7 +411,7 @@
       // Show loading
       btn.classList.add('loading');
       btn.disabled = true;
-      resultContent.innerHTML = '<div class="placeholder"><div class="icon">⏳</div><p>กำลังดึงข้อมูลจาก Azure DevOps...</p></div>';
+      resultContent.innerHTML = '<div class="placeholder"><div class="icon">⏳</div><p>กำลังโหลด...</p></div>';
 
       try {
         // ใช้ /api/my_tasks ที่ใช้ session (ถ้า session ไม่ทำงาน fallback ไป demo)

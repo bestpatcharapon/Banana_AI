@@ -2,7 +2,6 @@ class ChatController < ActionController::Base
   MAX_RETRIES = 3
 
   def index
-    @messages = []
   end
 
   def send_message
@@ -79,7 +78,7 @@ class ChatController < ActionController::Base
           else
             last_error = "Invalid tool format"
             retries += 1
-            puts "DEBUG: Retry #{retries}/#{MAX_RETRIES} - #{last_error}"
+            Rails.logger.debug "Retry #{retries}/#{MAX_RETRIES} - #{last_error}"
           end
         else
           # No JSON found - might be a greeting or normal response
@@ -90,11 +89,11 @@ class ChatController < ActionController::Base
       rescue JSON::ParserError => e
         last_error = "JSON parse error: #{e.message}"
         retries += 1
-        puts "DEBUG: Retry #{retries}/#{MAX_RETRIES} - #{last_error}"
+        Rails.logger.debug "Retry #{retries}/#{MAX_RETRIES} - #{last_error}"
       rescue => e
         last_error = e.message
         retries += 1
-        puts "DEBUG: Retry #{retries}/#{MAX_RETRIES} - #{last_error}"
+        Rails.logger.debug "Retry #{retries}/#{MAX_RETRIES} - #{last_error}"
       end
     end
     
@@ -171,7 +170,7 @@ class ChatController < ActionController::Base
         final_content = final_response.content.first[:text]
       rescue => e
         summarize_retries += 1
-        puts "DEBUG: Summarize Retry #{summarize_retries}/#{MAX_RETRIES} - #{e.message}"
+        Rails.logger.debug "Summarize Retry #{summarize_retries}/#{MAX_RETRIES} - #{e.message}"
         sleep(1) # Wait 1 second before retry
       end
     end
@@ -184,8 +183,8 @@ class ChatController < ActionController::Base
     end
 
   rescue => e
-    puts "DEBUG: Controller Error: #{e.message}"
-    puts e.backtrace
+    Rails.logger.error "Controller Error: #{e.message}"
+    Rails.logger.error e.backtrace.join("\n")
     render json: { role: "assistant", content: "System Error: #{e.message}" }
   end
 end

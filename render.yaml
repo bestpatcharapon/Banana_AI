@@ -4,7 +4,7 @@ services:
     name: banana-ai-api
     env: docker
     repo: https://github.com/bestpatcharapon/Banana_Ai_Assistant
-    branch: main
+    branch: API_Groq_Connect_mcp_server
     
     envVars:
       - key: RAILS_MASTER_KEY
@@ -43,7 +43,7 @@ services:
     name: banana-ai-frontend
     env: static
     repo: https://github.com/bestpatcharapon/Banana_Ai_Assistant
-    branch: main
+    branch: API_Groq_Connect_mcp_server
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist/frontend/browser
     

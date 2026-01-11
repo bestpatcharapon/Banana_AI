@@ -21,10 +21,10 @@
 
   <!-- Action Section -->
   <div class="action-section">
-    <!-- Login Button -->
-    <button *ngIf="!user?.logged_in" class="login-btn" (click)="login()">
+    <!-- Login Button - Direct href, no JavaScript -->
+    <a *ngIf="!user?.logged_in" class="login-btn" href="/auth/microsoft">
       🔐 เข้าสู่ระบบด้วย Microsoft
-    </button>
+    </a>
 
     <!-- Fetch Button -->
     <button *ngIf="user?.logged_in" class="action-btn" (click)="fetchTasks()" [disabled]="isLoading">

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://banana-ai-api.onrender.com'
+  apiUrl: 'https://banana-ai-assistant.onrender.com'
 };

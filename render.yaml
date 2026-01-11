@@ -1,7 +1,7 @@
 services:
   # Rails API Backend
   - type: web
-    name: banana-ai-api
+    name: banana-ai-assistant
     env: docker
     repo: https://github.com/bestpatcharapon/Banana_Ai_Assistant
     branch: API_Groq_Connect_mcp_server
@@ -46,6 +46,10 @@ services:
     branch: API_Groq_Connect_mcp_server
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist/frontend/browser
+    
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
     
     headers:
       - path: /*

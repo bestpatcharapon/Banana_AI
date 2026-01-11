@@ -2,6 +2,7 @@
 # check=error=true
 
 # This Dockerfile builds Rails API + Angular Frontend in a single container
+# Version: 2024-01-12-v2 (force rebuild)
 
 ARG RUBY_VERSION=3.4.7
 ARG NODE_VERSION=20
@@ -13,7 +14,12 @@ WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm ci --legacy-peer-deps
 COPY frontend/ ./
+
+# Build with production configuration - uses environment.prod.ts
 RUN npm run build -- --configuration production
+
+# Verify the build output
+RUN ls -la dist/frontend/browser/
 
 # === Stage 2: Build Rails Backend ===
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
@@ -51,6 +57,9 @@ RUN bundle exec bootsnap precompile -j 1 app/ lib/
 
 # Copy Angular build to Rails public folder
 COPY --from=frontend-build /app/frontend/dist/frontend/browser ./public/
+
+# Verify Angular was copied
+RUN ls -la ./public/
 
 # === Stage 3: Final Image ===
 FROM base

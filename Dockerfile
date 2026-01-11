@@ -13,7 +13,7 @@ WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm ci --legacy-peer-deps
 COPY frontend/ ./
-RUN npm run build
+RUN npm run build -- --configuration production
 
 # === Stage 2: Build Rails Backend ===
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base

@@ -88,7 +88,6 @@ export class ApiService {
   logout(): void {
     const token = this.getToken();
     this.clearToken();
-    // Use relative URL - works on any domain
-    window.location.href = `/auth/logout${token ? '?token=' + token : ''}`;
+    window.location.href = `${this.apiUrl}/auth/logout${token ? '?token=' + token : ''}`;
   }
 }

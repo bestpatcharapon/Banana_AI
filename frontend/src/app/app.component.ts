@@ -29,8 +29,7 @@ export class AppComponent implements OnInit {
   // === Authentication ===
 
   login(): void {
-    // Use relative URL - works on any domain
-    window.location.href = '/auth/microsoft';
+    window.location.href = this.api.getLoginUrl();
   }
 
   logout(): void {

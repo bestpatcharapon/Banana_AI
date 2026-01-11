@@ -1,0 +1,84 @@
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1>Banana AI Assistant</h1>
+    <p>ดึงงานของคุณจาก Azure DevOps</p>
+  </div>
+
+  <!-- User Card -->
+  <div class="user-card">
+    <div class="user-avatar">
+      {{ user?.logged_in ? (user?.name?.charAt(0) || '?') : '?' }}
+    </div>
+    <div class="user-info">
+      <h3>{{ user?.logged_in ? user?.name : 'ยังไม่ได้เข้าสู่ระบบ' }}</h3>
+      <p>{{ user?.logged_in ? user?.email : 'กรุณาเข้าสู่ระบบด้วย Microsoft' }}</p>
+    </div>
+    <button *ngIf="user?.logged_in" class="logout-btn" (click)="logout()">
+      ออก
+    </button>
+  </div>
+
+  <!-- Action Section -->
+  <div class="action-section">
+    <!-- Login Button -->
+    <button *ngIf="!user?.logged_in" class="login-btn" (click)="login()">
+      🔐 เข้าสู่ระบบด้วย Microsoft
+    </button>
+
+    <!-- Fetch Button -->
+    <button *ngIf="user?.logged_in" class="action-btn" (click)="fetchTasks()" [disabled]="isLoading">
+      <span *ngIf="isLoading">⏳</span>
+      <span>📋 ดึงงานของฉัน</span>
+    </button>
+  </div>
+
+  <!-- Tabs for Results -->
+  <div class="tabs" *ngIf="taskResponse && !isLoading">
+    <button class="tab" [class.active]="activeTab === 'active'" (click)="activeTab = 'active'">
+      📊 งาน Active
+    </button>
+    <button class="tab" [class.active]="activeTab === 'pullreq'" (click)="activeTab = 'pullreq'">
+      🔀 Pull Requested
+    </button>
+    <button class="tab" [class.active]="activeTab === 'changes'" (click)="activeTab = 'changes'">
+      📅 State Changes
+    </button>
+  </div>
+
+  <!-- Result Section -->
+  <div class="result-section">
+    <div class="result-label">ผลลัพธ์</div>
+    
+    <div class="result-content">
+      <!-- Loading -->
+      <div *ngIf="isLoading" class="placeholder">
+        <div class="icon">⏳</div>
+        <p>กำลังโหลด...</p>
+      </div>
+
+      <!-- Error -->
+      <div *ngIf="error" class="placeholder error">
+        <div class="icon">❌</div>
+        <p>{{ error }}</p>
+      </div>
+
+      <!-- Not logged in -->
+      <div *ngIf="!user?.logged_in && !isLoading && !taskResponse" class="placeholder">
+        <div class="icon">🔐</div>
+        <p>กรุณาเข้าสู่ระบบก่อน</p>
+      </div>
+
+      <!-- No tasks yet -->
+      <div *ngIf="user?.logged_in && !isLoading && !taskResponse && !error" class="placeholder">
+        <div class="icon">📂</div>
+        <p>กดปุ่มด้านบนเพื่อดึงงาน</p>
+      </div>
+
+      <!-- Task Content with Tabs -->
+      <div *ngIf="taskResponse && !isLoading" class="task-content">
+        <div [innerHTML]="getTabContent()"></div>
+      </div>
+    </div>
+  </div>
+</div>

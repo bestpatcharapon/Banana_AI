@@ -1,19 +1,24 @@
 services:
+  # Rails API Backend
   - type: web
-    name: banana-ai-assistant
+    name: banana-ai-api
     env: docker
     repo: https://github.com/bestpatcharapon/Banana_Ai_Assistant
-    branch: API_Groq_Connect_mcp_server
+    branch: main
     
     envVars:
       - key: RAILS_MASTER_KEY
         sync: false
       - key: DATABASE_URL
-        value: "sqlite3:storage/production.sqlite3" # ใช้ SQLite แทน
+        value: "sqlite3:storage/production.sqlite3"
       - key: RAILS_LOG_TO_STDOUT
         value: "true"
-      - key: RAILS_SERVE_STATIC_FILES # ให้ Rails serve ไฟล์ my_tasks.html
+      - key: RAILS_SERVE_STATIC_FILES
         value: "true"
+      
+      # Angular Frontend URL (for OAuth redirect)
+      - key: FRONTEND_URL
+        value: "https://banana-ai-frontend.onrender.com"
       
       # --- AI CONFIG ---
       - key: GROQ_API_KEY
@@ -32,3 +37,22 @@ services:
         sync: false
       - key: AZURE_CLIENT_SECRET
         sync: false
+
+  # Angular Frontend (Static Site)
+  - type: web
+    name: banana-ai-frontend
+    env: static
+    repo: https://github.com/bestpatcharapon/Banana_Ai_Assistant
+    branch: main
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist/frontend/browser
+    
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+    
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

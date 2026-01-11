@@ -3,6 +3,14 @@ Rails.application.routes.draw do
 post "/mcp", to: "mcp#handle"
 get  "/mcp", to: "mcp#handle"
 
+# MCP SSE for Inspector
+get  "/mcp/sse", to: "mcp_sse#sse"
+post "/mcp/message", to: "mcp_sse#message"
+
+# Dummy OAuth routes for MCP Inspector (no auth needed)
+get "/.well-known/oauth-protected-resource", to: proc { [200, {'Content-Type' => 'application/json'}, ['{}']] }
+get "/.well-known/oauth-authorization-server/*path", to: proc { [200, {'Content-Type' => 'application/json'}, ['{}']] }
+
   # Web Chat UI
   get "/chat", to: "chat#index"
   post "/chat/send", to: "chat#send_message"

@@ -42,7 +42,10 @@ gem "omniauth-azure-activedirectory-v2"
 gem "omniauth-rails_csrf_protection"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
-# gem "rack-cors"
+gem "rack-cors"
+
+# Thread-safe data structures for SSE
+gem "concurrent-ruby"
 
 group :development, :test do
   # Load environment variables from .env file

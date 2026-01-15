@@ -1,22 +1,31 @@
+databases:
+  - name: banana_ai_prod_db
+    databaseName: banana_ai_production
+    user: banana_mcp
+
 services:
-  # Single Service: Rails API + Angular Frontend
   - type: web
     name: banana-ai-assistant
     env: docker
-    repo: https://github.com/bestpatcharapon/Banana_Ai_Assistant
-    branch: API_Groq_Connect_mcp_server
+    repo: https://github.com/bestpatcharapon/Banana_AI
+    branch: main
+    plan: free
     
     envVars:
       - key: RAILS_MASTER_KEY
         sync: false
       - key: DATABASE_URL
-        value: "sqlite3:storage/production.sqlite3"
+        fromDatabase:
+          name: banana_ai_prod_db
+          property: connectionString
       - key: RAILS_LOG_TO_STDOUT
         value: "true"
       - key: RAILS_SERVE_STATIC_FILES
         value: "true"
+      - key: SECRET_KEY_BASE
+        generateValue: true
       
-      # Frontend URL = same domain (single service)
+      # Frontend URL (For simple setups where frontend is served by Rails public/)
       - key: FRONTEND_URL
         value: "https://banana-ai-assistant.onrender.com"
       

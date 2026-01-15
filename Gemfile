@@ -34,7 +34,7 @@ gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
 # Use MCP for AI
-gem "mcp", "~> 0.4.0"
+gem "mcp", "~> 0.5.0"
 
 # Microsoft OAuth
 gem "omniauth", "~> 2.1"

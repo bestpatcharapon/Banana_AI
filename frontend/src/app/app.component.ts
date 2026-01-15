@@ -46,7 +46,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     let loginUrl = this.api.getLoginUrl().replace('/auth/microsoft', '/auth/login');
     
     // Add electron=true to redirect back to Electron app
-    if ((window as any).electronAPI?.isElectron || (window as any).isElectron) {
+    const isElectron = (window as any).electronAPI?.isElectron || (window as any).isElectron || navigator.userAgent.toLowerCase().includes('electron');
+    
+    console.log('Is Electron check:', isElectron, navigator.userAgent);
+    
+    if (isElectron) {
       loginUrl += '?electron=true';
     }
     

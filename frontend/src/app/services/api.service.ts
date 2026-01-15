@@ -92,7 +92,9 @@ export class ApiService {
     let logoutUrl = `${this.apiUrl}/auth/logout${token ? '?token=' + token : ''}`;
     
     // Check if running in Electron
-    if ((window as any).electronAPI?.isElectron || (window as any).isElectron) {
+    const isElectron = (window as any).electronAPI?.isElectron || (window as any).isElectron || navigator.userAgent.toLowerCase().includes('electron');
+
+    if (isElectron) {
       // Append electron=true, handling existing query params
       logoutUrl += (logoutUrl.includes('?') ? '&' : '?') + 'electron=true';
     }

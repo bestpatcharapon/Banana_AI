@@ -10,7 +10,7 @@ let tray = null;
 const isDev = process.env.NODE_ENV === 'development';
 
 // API URL for the backend
-const API_URL = process.env.API_URL || 'http://localhost:3000';
+const API_URL = process.env.API_URL || 'https://banana-ai-assistant-o2r6.onrender.com';
 
 function createWindow() {
   // Create the browser window
@@ -102,6 +102,7 @@ function createWindow() {
     
     // If navigating to our API server (for OAuth login/logout)
     if (navigationUrl.includes('localhost:3000') || 
+        navigationUrl.includes('banana-ai-assistant-o2r6.onrender.com') ||
         navigationUrl.includes('/auth/microsoft') ||
         navigationUrl.includes('/auth/logout') || // Create separate window for logout too
         navigationUrl.includes('login.microsoftonline.com')) {

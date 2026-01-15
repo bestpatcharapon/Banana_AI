@@ -1,0 +1,741 @@
+{
+  "info": {
+    "name": "🍌 Banana AI Assistant - Complete MCP Testing",
+    "description": "Complete Postman Collection สำหรับทดสอบ MCP Server และ API ทั้งหมดของ Banana AI Assistant\n\n## วิธีใช้:\n1. ตั้งค่า Variables ใน Collection\n2. เริ่มจาก Health Check\n3. ทำ MCP Initialize ก่อนเรียก Tools\n4. ทดสอบ Tools ตามต้องการ",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string",
+      "description": "Rails Server URL"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string",
+      "description": "Azure DevOps Personal Access Token (PAT)"
+    },
+    {
+      "key": "user_email",
+      "value": "Patcharapon@bananacoding.com",
+      "type": "string",
+      "description": "Your Azure DevOps email"
+    },
+    {
+      "key": "project_name",
+      "value": "YOUR_PROJECT",
+      "type": "string",
+      "description": "Azure DevOps Project Name"
+    },
+    {
+      "key": "repo_name",
+      "value": "YOUR_REPO",
+      "type": "string",
+      "description": "Repository Name"
+    }
+  ],
+  "item": [
+    {
+      "name": "🏥 1. Health Check",
+      "item": [
+        {
+          "name": "Rails Health Check",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/up",
+            "description": "ตรวจสอบว่า Rails server ทำงานอยู่หรือไม่"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🚀 2. MCP Initialize (ทำก่อน!)",
+      "item": [
+        {
+          "name": "Step 1: Initialize",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"initialize\",\n  \"params\": {\n    \"protocolVersion\": \"2024-11-05\",\n    \"capabilities\": {},\n    \"clientInfo\": {\n      \"name\": \"postman-test\",\n      \"version\": \"1.0.0\"\n    }\n  }\n}"
+            },
+            "description": "เริ่มต้น MCP session - ต้องทำก่อนเรียก tools"
+          }
+        },
+        {
+          "name": "Step 2: Initialized Notification",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"notifications/initialized\"\n}"
+            },
+            "description": "แจ้ง MCP server ว่า client พร้อมแล้ว"
+          }
+        },
+        {
+          "name": "Step 3: List All Tools",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2,\n  \"method\": \"tools/list\",\n  \"params\": {}\n}"
+            },
+            "description": "ดูรายการ tools ทั้งหมดที่มีใน MCP Server"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔧 3. Basic Tools (ไม่ต้อง Token)",
+      "item": [
+        {
+          "name": "Health Check Tool",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 10,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"health-check-tool\",\n    \"arguments\": {}\n  }\n}"
+            },
+            "description": "ทดสอบ Health Check Tool - ไม่ต้องใช้ token"
+          }
+        },
+        {
+          "name": "Time Now Tool",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 11,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"time-now-tool\",\n    \"arguments\": {}\n  }\n}"
+            },
+            "description": "ดึงเวลาปัจจุบัน - ไม่ต้องใช้ token"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🤖 4. Groq LLM Tool (ต้องมี GROQ_API_KEY)",
+      "item": [
+        {
+          "name": "Groq - Basic Chat",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 100,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"groq-inference-tool\",\n    \"arguments\": {\n      \"model\": \"llama-3.3-70b-versatile\",\n      \"prompt\": \"สวัสดี! ช่วยแนะนำตัวหน่อย\",\n      \"temperature\": 0.7\n    }\n  }\n}"
+            },
+            "description": "Basic chat กับ Groq LLM"
+          }
+        },
+        {
+          "name": "Groq - With System Prompt",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 101,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"groq-inference-tool\",\n    \"arguments\": {\n      \"model\": \"llama-3.3-70b-versatile\",\n      \"prompt\": \"งานของฉันวันนี้มีอะไรบ้าง?\",\n      \"system_prompt\": \"คุณคือผู้ช่วย AI ที่ตอบเป็นภาษาไทย สั้น กระชับ และใส่ emoji\",\n      \"temperature\": 0.5\n    }\n  }\n}"
+            },
+            "description": "Chat พร้อม System Prompt กำหนดบุคลิก"
+          }
+        },
+        {
+          "name": "Groq - Llama 3.1 8B (Fast)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 102,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"groq-inference-tool\",\n    \"arguments\": {\n      \"model\": \"llama-3.1-8b-instant\",\n      \"prompt\": \"1+1 เท่ากับเท่าไหร่?\",\n      \"temperature\": 0.1\n    }\n  }\n}"
+            },
+            "description": "ใช้ Model เล็ก เร็วกว่า"
+          }
+        },
+        {
+          "name": "Groq - Mixtral 8x7B",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 103,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"groq-inference-tool\",\n    \"arguments\": {\n      \"model\": \"mixtral-8x7b-32768\",\n      \"prompt\": \"อธิบาย MCP Protocol แบบง่ายๆ\",\n      \"system_prompt\": \"ตอบเป็นภาษาไทย ไม่เกิน 100 คำ\",\n      \"temperature\": 0.7\n    }\n  }\n}"
+            },
+            "description": "ใช้ Mixtral Model"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📋 5. Azure DevOps - Projects & Teams",
+      "item": [
+        {
+          "name": "List Projects",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 200,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_projects\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึงรายการ Projects ทั้งหมด"
+          }
+        },
+        {
+          "name": "List Team Members",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 201,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_team_members\",\n      \"project\": \"{{project_name}}\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึงรายการ Team Members ใน Project"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📝 6. Azure DevOps - Work Items",
+      "item": [
+        {
+          "name": "List All Active Work Items",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 210,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_all_active_work_items\",\n      \"count\": 20,\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึง Active Work Items ทั้งหมด"
+          }
+        },
+        {
+          "name": "List My Active Work Items",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 211,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_my_active_work_items\",\n      \"assigned_to\": \"{{user_email}}\",\n      \"count\": 10,\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึง Active Work Items ของตัวเอง"
+          }
+        },
+        {
+          "name": "List Work Items (Custom Query)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 212,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_work_items\",\n      \"project\": \"{{project_name}}\",\n      \"query\": \"SELECT [System.Id], [System.Title], [System.State] FROM WorkItems WHERE [System.State] = 'Active' ORDER BY [System.CreatedDate] DESC\",\n      \"count\": 10,\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึง Work Items ด้วย Custom WIQL Query"
+          }
+        },
+        {
+          "name": "Get Work Item by ID",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 213,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"get_work_item\",\n      \"work_item_id\": 12345,\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึงรายละเอียด Work Item ตาม ID (แก้ ID ตามต้องการ)"
+          }
+        },
+        {
+          "name": "Create Work Item (Bug)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 214,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"create_work_item\",\n      \"project\": \"{{project_name}}\",\n      \"work_item_type\": \"Bug\",\n      \"title\": \"[Test] Bug from Postman\",\n      \"description\": \"This is a test bug created from Postman\",\n      \"assigned_to\": \"{{user_email}}\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "สร้าง Bug ใหม่"
+          }
+        },
+        {
+          "name": "Create Work Item (Task)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 215,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"create_work_item\",\n      \"project\": \"{{project_name}}\",\n      \"work_item_type\": \"Task\",\n      \"title\": \"[Test] Task from Postman\",\n      \"description\": \"This is a test task created from Postman\",\n      \"assigned_to\": \"{{user_email}}\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "สร้าง Task ใหม่"
+          }
+        },
+        {
+          "name": "Create Work Item (User Story)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 216,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"create_work_item\",\n      \"project\": \"{{project_name}}\",\n      \"work_item_type\": \"User Story\",\n      \"title\": \"[Test] User Story from Postman\",\n      \"description\": \"As a user, I want to test the API\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "สร้าง User Story ใหม่"
+          }
+        },
+        {
+          "name": "Update Work Item",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 217,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"update_work_item\",\n      \"work_item_id\": 12345,\n      \"title\": \"[Updated] New Title\",\n      \"state\": \"Active\",\n      \"description\": \"Updated description\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "อัพเดท Work Item (แก้ work_item_id)"
+          }
+        },
+        {
+          "name": "Delete Work Item",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 218,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"delete_work_item\",\n      \"work_item_id\": 12345,\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "⚠️ ลบ Work Item (ระวัง!)"
+          }
+        },
+        {
+          "name": "List My State Changes Today",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 219,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_my_state_changes_today\",\n      \"assigned_to\": \"{{user_email}}\",\n      \"count\": 50,\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึง State Changes วันนี้"
+          }
+        }
+      ]
+    },
+    {
+      "name": "💬 7. Azure DevOps - Comments",
+      "item": [
+        {
+          "name": "Add Comment to Work Item",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 220,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"add_comment\",\n      \"project\": \"{{project_name}}\",\n      \"work_item_id\": 12345,\n      \"comment\": \"Test comment from Postman 🎉\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "เพิ่ม Comment ใน Work Item"
+          }
+        },
+        {
+          "name": "List Comments",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 221,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_comments\",\n      \"project\": \"{{project_name}}\",\n      \"work_item_id\": 12345,\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดู Comments ทั้งหมดใน Work Item"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🏃 8. Azure DevOps - Sprints & Boards",
+      "item": [
+        {
+          "name": "List Sprints",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 230,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_sprints\",\n      \"project\": \"{{project_name}}\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึงรายการ Sprints ทั้งหมด"
+          }
+        },
+        {
+          "name": "Get Current Sprint",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 231,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"get_current_sprint\",\n      \"project\": \"{{project_name}}\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึง Current Sprint"
+          }
+        },
+        {
+          "name": "List Boards",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 232,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_boards\",\n      \"project\": \"{{project_name}}\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึงรายการ Boards"
+          }
+        },
+        {
+          "name": "Get Board Columns",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 233,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"get_board_columns\",\n      \"project\": \"{{project_name}}\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึง Board Columns"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔧 9. Azure DevOps - Pipelines",
+      "item": [
+        {
+          "name": "List Pipelines",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 240,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_pipelines\",\n      \"project\": \"{{project_name}}\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึงรายการ Pipelines"
+          }
+        },
+        {
+          "name": "Get Pipeline Runs",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 241,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"get_pipeline_runs\",\n      \"project\": \"{{project_name}}\",\n      \"pipeline_id\": 1,\n      \"count\": 10,\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึง Pipeline Runs (แก้ pipeline_id)"
+          }
+        },
+        {
+          "name": "Run Pipeline",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 242,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"run_pipeline\",\n      \"project\": \"{{project_name}}\",\n      \"pipeline_id\": 1,\n      \"branch\": \"main\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "⚠️ Trigger Pipeline Run"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📦 10. Azure DevOps - Repositories",
+      "item": [
+        {
+          "name": "List Repositories",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 250,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_repositories\",\n      \"project\": \"{{project_name}}\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึงรายการ Git Repositories"
+          }
+        },
+        {
+          "name": "List Branches",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 251,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_branches\",\n      \"project\": \"{{project_name}}\",\n      \"repo_name\": \"{{repo_name}}\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึงรายการ Branches"
+          }
+        },
+        {
+          "name": "List Commits",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 252,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_commits\",\n      \"project\": \"{{project_name}}\",\n      \"repo_name\": \"{{repo_name}}\",\n      \"branch\": \"main\",\n      \"count\": 10,\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึง Commits ล่าสุด"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔀 11. Azure DevOps - Pull Requests",
+      "item": [
+        {
+          "name": "List Pull Requests",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 260,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_pull_requests\",\n      \"project\": \"{{project_name}}\",\n      \"repo_name\": \"{{repo_name}}\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึงรายการ Pull Requests"
+          }
+        },
+        {
+          "name": "List My Pull Requests",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 261,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_my_pull_requests\",\n      \"project\": \"{{project_name}}\",\n      \"assigned_to\": \"{{user_email}}\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึง Pull Requests ของตัวเอง"
+          }
+        },
+        {
+          "name": "Get Pull Request Details",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 262,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"get_pull_request\",\n      \"project\": \"{{project_name}}\",\n      \"repo_name\": \"{{repo_name}}\",\n      \"pull_request_id\": 123,\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึงรายละเอียด PR (แก้ pull_request_id)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧪 12. Azure DevOps - Test Plans",
+      "item": [
+        {
+          "name": "List Test Plans",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 270,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_test_plans\",\n      \"project\": \"{{project_name}}\",\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึงรายการ Test Plans"
+          }
+        },
+        {
+          "name": "List Test Suites",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 271,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_test_suites\",\n      \"project\": \"{{project_name}}\",\n      \"test_plan_id\": 1,\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึง Test Suites (แก้ test_plan_id)"
+          }
+        },
+        {
+          "name": "List Test Cases",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/mcp",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 272,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"azure-devops-tool\",\n    \"arguments\": {\n      \"action\": \"list_test_cases\",\n      \"project\": \"{{project_name}}\",\n      \"test_plan_id\": 1,\n      \"test_suite_id\": 1,\n      \"access_token\": \"{{access_token}}\"\n    }\n  }\n}"
+            },
+            "description": "ดึง Test Cases (แก้ IDs)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🌐 13. API Endpoints",
+      "item": [
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/auth/user",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{access_token}}"}
+            ],
+            "description": "ดึงข้อมูล User ปัจจุบัน (ใช้หลัง OAuth login)"
+          }
+        },
+        {
+          "name": "My Tasks - Demo (POST)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/my_tasks/demo",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access_token\": \"{{access_token}}\",\n  \"email\": \"{{user_email}}\"\n}"
+            },
+            "description": "ดึง Tasks ผ่าน Demo API (ไม่ต้อง OAuth login)"
+          }
+        },
+        {
+          "name": "My Tasks - Demo (GET)",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/my_tasks/demo?access_token={{access_token}}&email={{user_email}}",
+            "description": "ดึง Tasks ผ่าน Demo API (GET method)"
+          }
+        },
+        {
+          "name": "Chat Page",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/chat",
+            "description": "หน้า Chat UI"
+          }
+        }
+      ]
+    }
+  ]
+}

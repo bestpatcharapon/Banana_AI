@@ -23,7 +23,8 @@ get "/.well-known/oauth-authorization-server/*path", to: proc { [200, {'Content-
     match "/my_tasks/demo", to: "my_tasks#options", via: :options  # CORS preflight
   end
 
-  # Microsoft OAuth
+  # Microsoft # Auth routes
+  get 'auth/login', to: 'auth#login'
   get '/auth/:provider/callback', to: 'auth#callback'
   get '/auth/failure', to: 'auth#failure'
   get '/auth/logout', to: 'auth#logout'

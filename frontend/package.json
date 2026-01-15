@@ -1,6 +1,10 @@
 {
-  "name": "frontend",
-  "version": "0.0.0",
+  "name": "banana-ai-assistant",
+  "version": "1.0.0",
+  "description": "Banana AI Assistant - Your AI-powered productivity companion",
+  "author": "Banana AI Team",
+  "license": "MIT",
+  "main": "electron/main.js",
   "scripts": {
     "ng": "ng",
     "start": "npm run build -- --configuration development && npx http-server dist/frontend/browser -p 4200 -c-1 --cors",
@@ -8,7 +12,14 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve": "npx http-server dist/frontend/browser -p 4200 -c-1 --cors"
+    "serve": "npx http-server dist/frontend/browser -p 4200 -c-1 --cors",
+    "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:4200 && cross-env NODE_ENV=development electron .\"",
+    "electron:build": "npm run build -- --configuration production --base-href ./ && electron-builder --config electron-builder.json",
+    "electron:build:win": "npm run build -- --configuration production --base-href ./ && electron-builder --config electron-builder.json --win",
+    "electron:build:mac": "npm run build -- --configuration production --base-href ./ && electron-builder --config electron-builder.json --mac",
+    "electron:build:linux": "npm run build -- --configuration production --base-href ./ && electron-builder --config electron-builder.json --linux",
+    "electron:run": "electron .",
+    "postinstall": "electron-builder install-app-deps"
   },
   "private": true,
   "dependencies": {
@@ -29,12 +40,17 @@
     "@angular/cli": "^17.3.17",
     "@angular/compiler-cli": "^17.3.0",
     "@types/jasmine": "~5.1.0",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^28.3.3",
+    "electron-builder": "^24.13.3",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.4.2"
+    "typescript": "~5.4.2",
+    "wait-on": "^7.2.0"
   }
 }

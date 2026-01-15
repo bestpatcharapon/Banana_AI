@@ -2,6 +2,7 @@ databases:
   - name: banana_ai_prod_db
     databaseName: banana_ai_production
     user: banana_mcp
+    plan: free
 
 services:
   - type: web

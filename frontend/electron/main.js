@@ -427,6 +427,7 @@ app.on('web-contents-created', (event, contents) => {
     // Allow OAuth flows to stay internal
     if (navigationUrl.includes('login.microsoftonline.com') || 
         navigationUrl.includes('live.com') ||
+        navigationUrl.includes('banana-ai-assistant-o2r6.onrender.com') ||
         navigationUrl.includes('microsoft.com')) {
       console.log('Allowing internal navigation to OAuth provider:', navigationUrl);
       return;

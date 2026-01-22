@@ -1,12 +1,13 @@
-/* ใช้ system fonts แทน Google Fonts */
-$bg: #f5f5f5;
+/* Banana Assistant - Modern Orange Theme */
+$primary: #f97316;
+$primary-light: #fdba74;
+$primary-dark: #ea580c;
+$bg: #fafafa;
 $card: #ffffff;
 $text-primary: #1a1a1a;
 $text-secondary: #555;
 $text-muted: #888;
-$border: #e0e0e0;
-$accent: #fef3c7;
-$accent-dark: #fcd34d;
+$border: #e5e5e5;
 
 :host {
   display: block;
@@ -15,233 +16,382 @@ $accent-dark: #fcd34d;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.container {
-  max-width: 500px;
+.app-container {
+  max-width: 400px;
   margin: 0 auto;
-  padding: 40px 20px;
-}
-
-.header {
-  background: linear-gradient(135deg, #fef3c7, #fde68a);
-  padding: 32px 24px;
-  text-align: center;
-  border-radius: 24px 24px 0 0;
-  border-bottom: 1px solid $accent-dark;
-
-  h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #78350f;
-    margin: 0 0 4px 0;
-  }
-
-  p {
-    color: #92400e;
-    font-size: 0.85rem;
-    margin: 0;
-  }
-}
-
-.user-card {
+  min-height: 100vh;
   background: $card;
-  padding: 20px 24px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+// Header Bar
+.header-bar {
+  background: $primary;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
-  gap: 14px;
-  border-left: 1px solid $border;
-  border-right: 1px solid $border;
+  justify-content: space-between;
+  
+  .app-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+  }
 }
 
-.user-avatar {
-  width: 42px;
-  height: 42px;
+.menu-btn, .close-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  position: relative;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: white;
+  color: $primary;
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: $accent;
-  border: 2px solid $accent-dark;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #78350f;
 }
 
-.user-info {
+// Main Content
+.main-content {
   flex: 1;
+  padding: 32px 24px;
+  overflow-y: auto;
+}
 
-  h3 {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: $text-primary;
-    margin: 0 0 2px 0;
-  }
+// Welcome Section
+.welcome-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
 
-  p {
-    color: $text-muted;
-    font-size: 0.8rem;
-    margin: 0;
+.sparkle-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.welcome-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: $text-primary;
+  margin: 0 0 8px 0;
+  
+  .highlight {
+    color: $primary;
   }
 }
 
-.logout-btn {
-  background: transparent;
+.welcome-subtitle {
   color: $text-muted;
-  border: 1px solid $border;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.75rem;
-  transition: all 0.2s;
+  font-size: 0.95rem;
+  margin: 0;
+}
 
+// Action Buttons
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.option-btn {
+  background: $card;
+  border: 2px solid $border;
+  border-radius: 16px;
+  padding: 20px 24px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  
   &:hover {
-    background: #fef2f2;
-    color: #dc2626;
-    border-color: #fca5a5;
+    border-color: $primary;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(249, 115, 22, 0.12);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &.login {
+    background: linear-gradient(135deg, $primary, $primary-dark);
+    border-color: transparent;
+    
+    .option-title, .option-desc {
+      color: white;
+    }
+    
+    &:hover {
+      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.35);
+    }
   }
 }
 
-.action-section {
-  background: $card;
-  padding: 20px 24px;
-  border-left: 1px solid $border;
-  border-right: 1px solid $border;
+.option-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: $primary;
+  margin: 0;
 }
 
-.login-btn,
-.action-btn {
-  background: $text-primary;
-  color: white;
+.option-desc {
+  font-size: 0.85rem;
+  color: $text-muted;
+  margin: 0;
+}
+
+// View Header
+.view-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  background: transparent;
   border: none;
-  padding: 14px 20px;
+  color: $primary;
   font-size: 0.9rem;
   font-weight: 500;
-  border-radius: 10px;
   cursor: pointer;
-  width: 100%;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  &:hover:not(:disabled) {
-    background: #333;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  padding: 8px 0;
+  
+  &:hover {
+    text-decoration: underline;
   }
 }
 
-.login-btn {
-  background: $card;
+.view-title {
+  font-size: 1.15rem;
+  font-weight: 600;
   color: $text-primary;
-  border: 1px solid $border;
-
-  &:hover {
-    background: #f9fafb;
-  }
+  margin: 0;
 }
 
 // Tabs
 .tabs {
   display: flex;
-  gap: 4px;
-  background: $card;
-  padding: 12px 24px;
-  border-left: 1px solid $border;
-  border-right: 1px solid $border;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .tab {
   flex: 1;
   background: $bg;
   border: 1px solid $border;
-  padding: 10px 12px;
-  font-size: 0.75rem;
+  padding: 10px 8px;
+  font-size: 0.8rem;
   font-weight: 500;
   color: $text-secondary;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s;
-
+  
   &:hover {
-    background: $accent;
+    background: lighten($primary-light, 15%);
   }
-
+  
   &.active {
-    background: $accent-dark;
-    color: #78350f;
-    border-color: $accent-dark;
+    background: $primary;
+    color: white;
+    border-color: $primary;
   }
 }
 
+// Result Section
 .result-section {
-  background: $card;
-  padding: 20px 24px;
-  border: 1px solid $border;
-  border-radius: 0 0 24px 24px;
-  min-height: 200px;
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-.result-label {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: $text-muted;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 12px;
-}
-
-.result-content {
-  line-height: 1.7;
-  color: $text-primary;
-  font-size: 0.9rem;
+  background: $bg;
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 180px;
 }
 
 .placeholder {
   text-align: center;
   color: $text-muted;
   padding: 40px 20px;
-
+  
   .icon {
     font-size: 2.5rem;
     margin-bottom: 12px;
     opacity: 0.5;
   }
-
+  
   p {
-    font-weight: 300;
     font-size: 0.9rem;
     margin: 0;
   }
-
+  
   &.error {
     color: #dc2626;
   }
 }
 
-.task-content {
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid $border;
+  border-top-color: $primary;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  animation: spin 0.8s linear infinite;
+}
 
-  h2,
-  h3 {
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.task-content {
+  line-height: 1.7;
+  color: $text-primary;
+  font-size: 0.9rem;
+  
+  h2, h3 {
     color: $text-primary;
     margin: 16px 0 8px;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 1rem;
   }
-
+  
   strong {
-    color: $text-primary;
+    color: $primary-dark;
     font-weight: 600;
   }
-
+  
   hr {
     border: none;
     border-top: 1px solid $border;
     margin: 16px 0;
+  }
+}
+
+// Leave Content
+.leave-content {
+  text-align: center;
+}
+
+.leave-card {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border: 1px solid #6ee7b7;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  
+  .leave-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+  }
+  
+  h4 {
+    color: #047857;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+  }
+  
+  p {
+    color: #059669;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+.leave-stats {
+  display: flex;
+  gap: 16px;
+}
+
+.stat-item {
+  flex: 1;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  
+  .stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $primary;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem;
+    color: $text-muted;
+  }
+}
+
+// User Footer
+.user-footer {
+  background: $card;
+  border-top: 1px solid $border;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $primary-light, $primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  
+  .user-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: $text-primary;
+  }
+  
+  .user-email {
+    font-size: 0.8rem;
+    color: $text-muted;
   }
 }

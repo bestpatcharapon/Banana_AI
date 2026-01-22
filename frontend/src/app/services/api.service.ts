@@ -50,6 +50,13 @@ export class ApiService {
     return !!this.getToken();
   }
 
+  // Check if running in Electron environment
+  private isElectronEnv(): boolean {
+    return (window as any).electronAPI?.isElectron || 
+           (window as any).isElectron || 
+           navigator.userAgent.toLowerCase().includes('electron');
+  }
+
   // Get headers with Authorization token
   private getAuthHeaders(): HttpHeaders {
     const token = this.getToken();
@@ -85,16 +92,23 @@ export class ApiService {
     return `${this.apiUrl}/auth/microsoft`;
   }
 
+  login(): void {
+    let loginUrl = this.getLoginUrl().replace('/auth/microsoft', '/auth/login');
+    
+    if (this.isElectronEnv()) {
+      loginUrl += '?electron=true';
+    }
+    
+    window.location.href = loginUrl;
+  }
+
   logout(): void {
     const token = this.getToken();
     this.clearToken();
     
     let logoutUrl = `${this.apiUrl}/auth/logout${token ? '?token=' + token : ''}`;
     
-    // Check if running in Electron
-    const isElectron = (window as any).electronAPI?.isElectron || (window as any).isElectron || navigator.userAgent.toLowerCase().includes('electron');
-
-    if (isElectron) {
+    if (this.isElectronEnv()) {
       // Append electron=true, handling existing query params
       logoutUrl += (logoutUrl.includes('?') ? '&' : '?') + 'electron=true';
     }

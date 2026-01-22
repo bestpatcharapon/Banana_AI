@@ -1,9 +1,10 @@
-import { Component, OnInit, AfterViewInit, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService, User, TaskResponse } from './services/api.service';
 
 type TabType = 'active' | 'pullreq' | 'changes';
+type ViewType = 'today' | 'lastweek' | 'leave' | null;
 
 @Component({
   selector: 'app-root',
@@ -12,86 +13,65 @@ type TabType = 'active' | 'pullreq' | 'changes';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   user: User | null = null;
   taskResponse: TaskResponse | null = null;
   isLoading = false;
   error: string | null = null;
   activeTab: TabType = 'active';
+  activeView: ViewType = null;
 
-  constructor(private api: ApiService, private ngZone: NgZone) {}
+  constructor(private api: ApiService) {}
 
   ngOnInit(): void {
     this.handleUrlParams();
     this.checkLogin();
   }
 
-  ngAfterViewInit(): void {
-    // Add native click listener for Electron compatibility
-    setTimeout(() => {
-      const loginBtn = document.querySelector('.login-btn');
-      if (loginBtn) {
-        loginBtn.addEventListener('click', () => {
-          console.log('Login button clicked (native)');
-          this.ngZone.run(() => this.login());
-        });
-      }
-    }, 100);
-  }
-
   // === Authentication ===
 
   login(): void {
-    // Determine login URL (use intermediate login endpoint)
-    let loginUrl = this.api.getLoginUrl().replace('/auth/microsoft', '/auth/login');
-    
-    // Add electron=true to redirect back to Electron app
-    const isElectron = (window as any).electronAPI?.isElectron || (window as any).isElectron || navigator.userAgent.toLowerCase().includes('electron');
-    
-    console.log('Is Electron check:', isElectron, navigator.userAgent);
-    
-    if (isElectron) {
-      loginUrl += '?electron=true';
-    }
-    
-    console.log('Opening login URL via POST:', loginUrl);
-    
-    // Create a form to POST to the login URL (required by OmniAuth v2 / Microsoft)
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = loginUrl;
-    
-    // Need verifying authenticity token in Rails? 
-    // Usually omniauth handles the initial request phase without strict CSRF token if configured, 
-    // but standard Rails might want one. 
-    // Our /auth/login controller action accepts GET, but then redirects to /auth/microsoft 
-    // which NEEDS POST.
-    
-    // Wait... /auth/login is OUR controller. It accepts GET.
-    // AND IT redirects to /auth/microsoft.
-    // The redirect from Rails to /auth/microsoft is also a GET (302 Found).
-    // THAT is the problem. Rails redirects with GET, but OmniAuth (and Microsoft) wants POST.
-    
-    // We need to change how we start the flow.
-    // Instead of redirecting from backend, we should start with POST from frontend directly to /auth/microsoft?electron=true
-    
-    // Let's change strategy:
-    // 1. POST directly to /auth/microsoft
-    // 2. But we need to set session[:is_electron] first.
-    
-    // Correct approach:
-    // 1. GET /auth/login?electron=true (sets session, returns HTML form that auto-posts to /auth/microsoft)
-    // OR simpler:
-    // Just use GET for /auth/login, and make /auth/login RENDER a view that auto-submits a POST form.
-    
-    // Let's try the simplest fix first: use window.location.href to our /auth/login (GET)
-    // AND modify Rails auth_controller#login to RENDER a POST form instead of redirecting.
-    
-    window.location.href = loginUrl;
+    this.api.login();
   }
 
   logout(): void {
     this.api.logout();
+    this.activeView = null;
+    this.taskResponse = null;
+  }
+
+  // === Menu Navigation ===
+
+  showTodayTasks(): void {
+    this.activeView = 'today';
+    this.activeTab = 'active';
+    this.fetchTasks();
+  }
+
+  showLastWeekTasks(): void {
+    this.activeView = 'lastweek';
+    this.activeTab = 'active';
+    this.fetchTasks();
+  }
+
+  showLeavePlan(): void {
+    this.activeView = 'leave';
+    // Leave plan is currently mock data, no API call needed
+  }
+
+  goBack(): void {
+    this.activeView = null;
+    this.taskResponse = null;
+    this.error = null;
+  }
+
+  getViewTitle(): string {
+    const titles: Record<string, string> = {
+      'today': "Today's Tasks",
+      'lastweek': "Last Week's Tasks",
+      'leave': 'Leave Plan'
+    };
+    return this.activeView ? titles[this.activeView] || '' : '';
   }
 
   // === Task Fetching ===
